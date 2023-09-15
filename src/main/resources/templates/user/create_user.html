@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Create New User</title>
+    <!--Bootstrap CSS-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.css">
+</head>
+<body>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+            <h1 class="text-center">Create New User</h1>
+            <div class="card-body">
+                <form th:action="@{/api/game/user/saveUser}" th:object="${user}" method="POST"> <!--@PostMapping na /saveUser-->
+
+                    <div class="form-group">
+                        <label>User Number</label>
+                        <input type="number" name="userNumber" th:field="*{userNumber}" placeholder="Enter User Number" class="form-control text-danger">
+                    </div>
+
+                    <div class="form-group">
+                        <label>User Name</label>
+                        <input type="text" name="name" th:field="*{name}" placeholder="Enter User Name" class="form-control text-danger">
+                    </div>
+
+                    <div class="form-group">
+                        <label>User Lastname</label>
+                        <input type="text" name="lastname" th:field="*{lastname}" placeholder="Enter User Lastname" class="form-control text-danger">
+                    </div>
+
+                    <div class="form-group">
+                        <label>PC Number</label>
+                        <input type="number" name="numberPC" th:field="*{numberPC}" placeholder="Enter PC Number For Booking" class="form-control text-danger">
+                    </div>
+
+                    <div class="box-footer text-center">
+                        <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                    </div>
+
+                </form>
+                <hr/>
+                <a th:href="@{/api/game/user}">Back to USERs.</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

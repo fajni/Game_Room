@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Room</title>
+
+    <!--Bootstrap CSS-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.css">
+</head>
+<body>
+<!--NAVBAR START-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <!--<a class="navbar-brand" href="#">Home</a>-->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a th:href="@{/api/game/pc}" class="nav-link">PCs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a th:href="@{/api/game/user}" class="nav-link">Users</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="../About.html" class="nav-link">About</a>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+<div class="container">
+    <hr/>
+</div>
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-auto mr-auto">
+            <h3>
+                <img th:src="@{/images/pc.png}" alt="Pc symbol" width="50" height="50" class="img-thumbnail"/>
+                List PCs
+            </h3>
+        </div>
+        <div class="col-auto">
+            <a th:href="@{/api/game/pc/create_pc}" class="btn btn-primary text-light">ADD PC</a>
+        </div>
+    </div>
+
+    <table class="table table-striped table-bordered table-dark">
+        <thread>
+            <tr class="bg-dark">
+                <th class="text-center">PC NUMBER</th>
+                <th class="text-center">TITLE</th>
+                <th class="text-center">STATUS</th>
+                <th class="text-center">USER NUMBER</th>
+                <th class="text-center">ACTIONS</th>
+            </tr>
+        </thread>
+
+        <tbody>
+        <tr th:each="pc: ${pcs}">
+            <td th:text="${pc.pcNumber}"></td>
+            <td th:text="${pc.title}"></td>
+            <td th:text="${pc.status}"></td>
+            <td th:text="${pc.userNumber}"></td>
+            <td class="text-center">
+                <a th:href="@{/api/game/pc/removePc(pcNumber=${pc.pcNumber})}"
+                   class="btn btn-danger text-light btn-sm">REMOVE</a>
+                <a th:href="@{/api/game/pc/update_pc(pcNumber=${pc.pcNumber})}"
+                   class="btn btn-warning text-light btn-sm">UPDATE</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <p class="text-right"><a th:href="@{/api/game/pc/json}">JSON View</a></p>
+    <hr/>
+    <p class="p-1 bg-white text-primary text-center"><a th:href="@{/api/game/user}">List USERs.</a></p>
+
+</div>
+
+</body>
+</html>
