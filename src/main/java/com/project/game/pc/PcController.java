@@ -39,6 +39,11 @@ public class PcController {
         return new ResponseEntity<Optional<Pc>>(pcService.getPc(pcNumber), HttpStatus.OK);
     }
 
+    @GetMapping("/search") //Search Bar, name se povezuje sa input u html ???
+    public Pc getPc(@RequestParam(name="pcNumber") Long pcNumber){
+        return pcService.getPc(pcNumber).get();
+    }
+
     @GetMapping("/removePc") //brisanje /removePc?pcNumber=1
     public ModelAndView removePc(@RequestParam Long pcNumber) {
         pcService.deletePc(pcNumber);

@@ -17,7 +17,8 @@ public class PcService{
     }
 
     public Optional<Pc> getPc(Long pcNumber) {
-        return pcRepository.findPcByNumber(pcNumber);
+        return Optional.ofNullable(pcRepository.findPcByNumber(pcNumber)
+                .orElseThrow(() -> new IllegalStateException("Pc with number " + pcNumber + " is not found!")));
     }
 
     public void addNewPc(Pc pc) {
