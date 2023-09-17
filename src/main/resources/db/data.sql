@@ -5,6 +5,6 @@ BEGIN
 END;
 
 BEGIN
-    INSERT INTO users(user_number, name, lastname, pc_number) VALUES(1, "Curtis James", "Jackson III", 1);
-    INSERT INTO users VALUES(2, "Austin", "Post", 2);
+    INSERT INTO players(player_number, name, lastname, pc_number) VALUES(1, "Curtis James", "Jackson III", 1);
+    INSERT INTO players VALUES(2, "Austin", "Post", 2);
 END;
