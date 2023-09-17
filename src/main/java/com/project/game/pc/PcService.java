@@ -53,8 +53,8 @@ public class PcService{
         if (!exists)
             throw new IllegalStateException("Pc with number " + pcNumber + " does not exist!");
 
-        if (!Objects.equals(pc.get().getUserNumber(), null))
-            throw new IllegalStateException("Pc has a user!");
+        if (!Objects.equals(pc.get().getPlayerNumber(), null))
+            throw new IllegalStateException("Pc has a player!");
 
         pcRepository.deleteById(pcNumber);
     }
@@ -65,7 +65,7 @@ public class PcService{
         Pc pc = pcRepository.findById(pcNumber)
                 .orElseThrow(() -> new IllegalStateException("Pc with number " + pcNumber + " does not exist!"));
 
-        if (pc.getUserNumber() != null)
+        if (pc.getPlayerNumber() != null)
             throw new IllegalStateException("Pc is currently in use!");
 
         if (title != null && title.length() > 0 && !Objects.equals(pc.getTitle(), title)) {

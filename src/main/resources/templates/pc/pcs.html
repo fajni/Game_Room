@@ -25,7 +25,7 @@
                         <a th:href="@{/api/game/pc}" class="nav-link">PCs</a>
                     </li>
                     <li class="nav-item">
-                        <a th:href="@{/api/game/user}" class="nav-link">Users</a>
+                        <a th:href="@{/api/game/player}" class="nav-link">PLAYERs</a>
                     </li>
                     <li class="nav-item">
                         <a href="../About.html" class="nav-link">About</a>
@@ -66,7 +66,7 @@
                 <th class="text-center">PC NUMBER</th>
                 <th class="text-center">TITLE</th>
                 <th class="text-center">STATUS</th>
-                <th class="text-center">USER NUMBER</th>
+                <th class="text-center">PLAYER NUMBER</th>
                 <th class="text-center">ACTIONS</th>
             </tr>
         </thread>
@@ -76,7 +76,7 @@
             <td th:text="${pc.pcNumber}"></td>
             <td th:text="${pc.title}"></td>
             <td th:text="${pc.status}"></td>
-            <td th:text="${pc.userNumber}"></td>
+            <td th:text="${pc.playerNumber}"></td>
             <td class="text-center">
                 <a th:href="@{/api/game/pc/removePc(pcNumber=${pc.pcNumber})}"
                    class="btn btn-danger text-light btn-sm">REMOVE</a>
@@ -88,7 +88,7 @@
     </table>
     <p class="text-right"><a th:href="@{/api/game/pc/json}">JSON View</a></p>
     <hr/>
-    <p class="p-1 bg-white text-primary text-center"><a th:href="@{/api/game/user}">List USERs.</a></p>
+    <p class="p-1 bg-white text-primary text-center"><a th:href="@{/api/game/player}">List PLAYERs.</a></p>
 
 </div>
 

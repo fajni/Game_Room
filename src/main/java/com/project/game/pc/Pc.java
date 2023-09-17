@@ -1,6 +1,6 @@
 package com.project.game.pc;
 
-import com.project.game.user.User;
+import com.project.game.player.Player;
 import jakarta.persistence.*;
 
 @Entity
@@ -21,20 +21,20 @@ public class Pc {
     private Long pcNumber;
     private String title;
     private String status;
-    private Long userNumber;
+    private Long playerNumber;
 
     @OneToOne(mappedBy = "pc")
-    private User user;
+    private Player player;
 
     public Pc() {
     }
 
-    public Pc(Long pcNumber, String title, String status, Long userNumber) {
+    public Pc(Long pcNumber, String title, String status, Long playerNumber) {
         super();
         this.pcNumber = pcNumber;
         this.title = title;
         this.status = status;
-        this.userNumber = userNumber;
+        this.playerNumber = playerNumber;
     }
 
     public Pc(String title) {
@@ -78,11 +78,11 @@ public class Pc {
         return status;
     }
 
-    public void setUserNumber(Long userNumber) {
-        this.userNumber = userNumber;
+    public void setPlayerNumber(Long playerNumber) {
+        this.playerNumber = playerNumber;
     }
 
-    public Long getUserNumber() {
-        return userNumber;
+    public Long getPlayerNumber() {
+        return playerNumber;
     }
 }

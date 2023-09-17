@@ -1,15 +1,15 @@
-package com.project.game.user;
+package com.project.game.player;
 
 import com.project.game.pc.Pc;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "users") //ne moze da se koristi user jer je ta rec rezervisana u postgresql
-public class User {
+@Table(name = "players") //ne moze da se koristi user jer je ta rec rezervisana u postgresql
+public class Player {
 
     @Id
     //@GeneratedValue(strategy = GenerationType.AUTO)
-    private Long userNumber;
+    private Long playerNumber;
     private String name;
     private String lastname;
 
@@ -19,19 +19,19 @@ public class User {
     @JoinColumn(name = "pc_number", referencedColumnName = "pcNumber")
     private Pc pc;
 
-    public User() {
+    public Player() {
     }
 
-    public User(Long userNumber, String name, String lastname, Long numberPc) {
+    public Player(Long playerNumber, String name, String lastname, Long numberPc) {
         super();
-        this.userNumber = userNumber;
+        this.playerNumber = playerNumber;
         this.name = name;
         this.lastname = lastname;
         this.numberPC = numberPc;
     }
 
-    public Long getUserNumber() {
-        return userNumber;
+    public Long getPlayerNumber() {
+        return playerNumber;
     }
 
     public String getName() {
@@ -42,8 +42,8 @@ public class User {
         return lastname;
     }
 
-    public void setUserNumber(Long userNumber) {
-        this.userNumber = userNumber;
+    public void setPlayerNumber(Long playerNumber) {
+        this.playerNumber = playerNumber;
     }
 
     public void setName(String name) {

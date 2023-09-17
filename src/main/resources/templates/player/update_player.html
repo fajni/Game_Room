@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+          content="width=device-width, player-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Update User</title>
+    <title>Update Player</title>
     <!--Bootstrap CSS-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.css">
 </head>
@@ -14,23 +14,23 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
-            <h1 class="text-center">Update User</h1>
+            <h1 class="text-center">Update Player</h1>
             <div class="card-body">
-                <form th:action="@{/api/game/user/updateUser}" th:object="${user}" method="POST"> <!--@PostMapping na /updateUser-->
+                <form th:action="@{/api/game/player/updatePlayer}" th:object="${player}" method="POST"> <!--@PostMapping na /updatePlayer-->
 
                     <div class="form-group">
-                        <label>User Number</label>
-                        <input type="number" name="userNumber" th:field="*{userNumber}" placeholder="Update User Number" class="form-control text-danger" readonly>
+                        <label>Player Number</label>
+                        <input type="number" name="playerNumber" th:field="*{playerNumber}" placeholder="Update Player's Number" class="form-control text-danger" readonly>
                     </div>
 
                     <div class="form-group">
-                        <label>User Name</label>
-                        <input type="text" name="name" th:field="*{name}" placeholder="Update User Name" class="form-control text-danger">
+                        <label>Player Name</label>
+                        <input type="text" name="name" th:field="*{name}" placeholder="Update Player's Name" class="form-control text-danger">
                     </div>
 
                     <div class="form-group">
-                        <label>User Lastname</label>
-                        <input type="text" name="lastname" th:field="*{lastname}" placeholder="Update User Lastname" class="form-control text-danger">
+                        <label>Player Lastname</label>
+                        <input type="text" name="lastname" th:field="*{lastname}" placeholder="Update Player's Lastname" class="form-control text-danger">
                     </div>
 
                     <div class="form-group">
@@ -44,7 +44,7 @@
 
                 </form>
                 <hr/>
-                <a th:href="@{/api/game/user}">Back to USERs.</a>
+                <a th:href="@{/api/game/player}">Back to PLAYERs.</a>
             </div>
         </div>
     </div>
