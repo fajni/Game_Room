@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 import java.util.Optional;
@@ -45,8 +46,9 @@ public class PcController {
     }
 
     @GetMapping("/removePc") //brisanje /removePc?pcNumber=1
-    public ModelAndView removePc(@RequestParam Long pcNumber) {
+    public ModelAndView removePc(@RequestParam Long pcNumber, RedirectAttributes r) {
         pcService.deletePc(pcNumber);
+        r.addFlashAttribute("delete","Pc "+pcNumber+" was deleted!");
         return new ModelAndView("redirect:/api/game/pc");
     }
 
@@ -59,8 +61,9 @@ public class PcController {
     }
 
     @PostMapping("/savePc") //nakon pozvane forme create_pc, potrebno je sacuvati objekat
-    public ModelAndView savePc(@ModelAttribute Pc pc) {
+    public ModelAndView savePc(@ModelAttribute Pc pc, RedirectAttributes r) {
         pcService.addNewPc(pc);
+        r.addFlashAttribute("add","Pc "+pc.getPcNumber()+" was added!");
         return new ModelAndView("redirect:/api/game/pc");
     }
 
@@ -76,9 +79,11 @@ public class PcController {
     public ModelAndView pcUpdate(
             @RequestParam("pcNumber") Long pcNumber,
             @RequestParam(required = false) String status,
-            @RequestParam(required = false) String title
+            @RequestParam(required = false) String title,
+            RedirectAttributes r
     ) {
         pcService.updatePc(pcNumber, title, status);
+        r.addFlashAttribute("update","Pc "+pcNumber+" was updated!");
         return new ModelAndView("redirect:/api/game/pc");
     }
 

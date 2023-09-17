@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 import java.util.Optional;
@@ -47,8 +48,9 @@ public class PlayerController {
     }
 
     @GetMapping("/removePlayer") //removePlayer?={playerNumber}
-    public ModelAndView removePlayer(@RequestParam Long playerNumber) {
+    public ModelAndView removePlayer(@RequestParam Long playerNumber, RedirectAttributes r) {
         playerService.deletePlayer(playerNumber);
+        r.addFlashAttribute("delete", "Player "+playerNumber+" was deleted!");
         return new ModelAndView("redirect:/api/game/player");
     }
 
@@ -61,8 +63,9 @@ public class PlayerController {
     }
 
     @PostMapping("/savePlayer")
-    public ModelAndView savePlayer(@ModelAttribute Player player) {
+    public ModelAndView savePlayer(@ModelAttribute Player player, RedirectAttributes r) {
         playerService.addNewPlayer(player);
+        r.addFlashAttribute("add","Player "+player.getPlayerNumber()+" was added!");
         return new ModelAndView("redirect:/api/game/player");
     }
 
@@ -79,9 +82,11 @@ public class PlayerController {
             @RequestParam("playerNumber") Long playerNumber,
             @RequestParam(required = false) String name,
             @RequestParam(required = false) String lastname,
-            @RequestParam(required = false) Long numberPC
+            @RequestParam(required = false) Long numberPC,
+            RedirectAttributes r
     ) {
         playerService.updatePlayer(playerNumber, name, lastname, numberPC);
+        r.addFlashAttribute("update","Player "+playerNumber+" was updated!");
         return new ModelAndView("redirect:/api/game/player");
     }
 

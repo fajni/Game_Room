@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script> <!--FadeOut Notifications-->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="30; URL=http://localhost:8080/api/game/pc"> <!--REFRESH EVERY 30s-->
     <title>Game Room</title>
 
     <!--Bootstrap CSS-->
@@ -87,10 +89,29 @@
         </tbody>
     </table>
     <p class="text-right"><a th:href="@{/api/game/pc/json}">JSON View</a></p>
+
+    <div th:if="${add}" id="add" class="alert alert-success text-center">
+        <b>[[${add}]]</b> <!--HTML ADD NOTIFICATION-->
+    </div>
+
+    <div th:if="${update}" id="update" class="alert alert-warning text-center">
+        <b>[[${update}]]</b> <!--HTML UPDATE NOTIFICATION-->
+    </div>
+
+    <div th:if="${delete}" id="delete" class="alert alert-danger text-center">
+        <b>[[${delete}]]</b> <!--HTML DELETE NOTIFICATION-->
+    </div>
+
     <hr/>
     <p class="p-1 bg-white text-primary text-center"><a th:href="@{/api/game/player}">List PLAYERs.</a></p>
 
 </div>
-
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#add").fadeOut(5000);
+        $("#update").fadeOut(5000);
+        $("#delete").fadeOut(5000);
+    });
+</script>
 </body>
 </html>
