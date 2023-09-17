@@ -4,11 +4,10 @@ import com.project.game.pc.Pc;
 import com.project.game.pc.PcRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class UserService {
@@ -24,7 +23,16 @@ public class UserService {
     }
 
     public User getUser(Long userNumber) {
-        return userRepository.getReferenceById(userNumber);
+        return userRepository.findUserByNumber(userNumber).get();
+    }
+
+    public List<User> getUserByName(String name){
+
+        String firstLetter = name.substring(0, 1).toUpperCase();
+        String remainingLetters = name.substring(1, name.length());
+        name=firstLetter+remainingLetters; //ukoliko se prosledi ime sa malim slovima
+
+        return userRepository.findUserByName(name);
     }
 
     public Optional<User> findSingleUserByUserNumber(Long userNumber) {

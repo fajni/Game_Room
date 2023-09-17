@@ -10,14 +10,14 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(path = {"api/game/user","api/game/user/"})
+@RequestMapping(path = {"api/game/user", "api/game/user/"})
 public class UserController {
 
     @Autowired
     private UserService userService;
 
     @GetMapping
-    public ModelAndView getUsers(){
+    public ModelAndView getUsers() {
         ModelAndView model = new ModelAndView("user/users");
         model.addObject("users", userService.getUsers());
         return model;
@@ -26,64 +26,72 @@ public class UserController {
     }
 
     @GetMapping("/json")
-    public List<User> getUsersJson(){
+    public List<User> getUsersJson() {
         return userService.getUsers();
     }
 
     @GetMapping("/{userNumber}")
-    public ResponseEntity<Optional<User>> getSingleUser(@PathVariable Long userNumber){
+    public ResponseEntity<Optional<User>> getSingleUser(@PathVariable Long userNumber) {
         return new ResponseEntity<Optional<User>>(userService.findSingleUserByUserNumber(userNumber), HttpStatus.OK);
     }
 
+    @GetMapping("/search")
+    public List<User> getUser(@RequestParam(name = "name") String name) {
+        List<User> users = userService.getUserByName(name);
+        return users;
+    }
+
     @GetMapping("/pc/{numberPc}") //dobijanje usera preko pcNumber
-    public ResponseEntity<Optional<User>> getSingleUserByPcNumber(@PathVariable Long numberPc){
+    public ResponseEntity<Optional<User>> getSingleUserByPcNumber(@PathVariable Long numberPc) {
         return new ResponseEntity<Optional<User>>(userService.findSingleUserByPcNumber(numberPc), HttpStatus.OK);
     }
 
     @GetMapping("/removeUser") //removeUser?={userNumber}
-    public ModelAndView removeUser(@RequestParam Long userNumber){
+    public ModelAndView removeUser(@RequestParam Long userNumber) {
         userService.deleteUser(userNumber);
         return new ModelAndView("redirect:/api/game/user");
     }
 
     @GetMapping("/create_user")
-    public ModelAndView submitUser(){
+    public ModelAndView submitUser() {
         ModelAndView model = new ModelAndView("user/create_user");//html file
         User newUser = new User();
         model.addObject("user", newUser);
         return model;
     }
+
     @PostMapping("/saveUser")
-    public ModelAndView saveUser(@ModelAttribute User user){
+    public ModelAndView saveUser(@ModelAttribute User user) {
         userService.addNewUser(user);
         return new ModelAndView("redirect:/api/game/user");
     }
 
     @GetMapping("/update_user")
-    public ModelAndView updateUser(@RequestParam Long userNumber){
+    public ModelAndView updateUser(@RequestParam Long userNumber) {
         ModelAndView model = new ModelAndView("user/update_user");
         User updateUser = userService.getUser(userNumber);
         model.addObject("user", updateUser);
         return model;
     }
+
     @PostMapping("/updateUser")
     public ModelAndView userUpdate(
             @RequestParam("userNumber") Long userNumber,
             @RequestParam(required = false) String name,
             @RequestParam(required = false) String lastname,
             @RequestParam(required = false) Long numberPC
-    ){
+    ) {
         userService.updateUser(userNumber, name, lastname, numberPC);
         return new ModelAndView("redirect:/api/game/user");
     }
 
     @PostMapping
-    public void addNewPc(@RequestBody User user){
+    public void addNewPc(@RequestBody User user) {
         userService.addNewUser(user);
     }
 
     @DeleteMapping(path = "/delete/{userNumber}")
-    public void deleteUser(@PathVariable("userNumber") Long userNumber){
+    public void deleteUser(@PathVariable("userNumber") Long userNumber) {
         userService.deleteUser(userNumber);
     }
 
@@ -91,7 +99,7 @@ public class UserController {
     public void updateUser(@PathVariable("userNumber") Long userNumber,
                            @RequestParam(required = false) String name,
                            @RequestParam(required = false) String lastname,
-                           @RequestParam(required = false) Long pcNumber){
+                           @RequestParam(required = false) Long pcNumber) {
         userService.updateUser(userNumber, name, lastname, pcNumber);
     }
 }
