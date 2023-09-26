@@ -40,7 +40,7 @@ Main task of the repository is to enable connection with database and to read/st
   - *artifactId: java-dotenv,*
   - *version: 5.2.2*
 
-All the front-end is done by using [*Thymeleaf*](https://www.thymeleaf.org/) dependecy, simple HTML files with Bootstrap libraries. Main idea is to track which pc is free for use and also to see which pc is used by user in game room.
+All the front-end is done by using [*Thymeleaf*](https://www.thymeleaf.org/) dependecy, simple HTML files with Bootstrap libraries. Main idea is to track which pc is free for use and also to see which pc is used by player in game room.
 
 Example of endpoint:
 
@@ -96,7 +96,7 @@ Creating database for project (*from SQL Shell psql*):
 
 <pre>CREATE DATABASE gameroom;
 
-GRANT ALL PRIVILEGES ON DATABASE "[*username*]" TO gameroom;</pre>
+GRANT ALL PRIVILEGES ON DATABASE "[*playername*]" TO gameroom;</pre>
 
 ## Available Endpoints
 
@@ -130,34 +130,34 @@ GRANT ALL PRIVILEGES ON DATABASE "[*username*]" TO gameroom;</pre>
 
 ***PlayerController***:
 - Get requests:
-  >localhost:8080/api/game/user, localhost:8080/api/game/user/
+  >localhost:8080/api/game/player, localhost:8080/api/game/player/
 
-  >localhost:8080/api/game/user/json
+  >localhost:8080/api/game/player/json
 
-  >localhost:8080/api/game/user/{userNumber}
+  >localhost:8080/api/game/player/{playerNumber}
 
-  >localhost:8080/api/game/user/pc/{userNumber}
+  >localhost:8080/api/game/player/pc/{playerNumber}
 
-  >localhost:8080/api/game/user/removeUser
+  >localhost:8080/api/game/player/removeplayer
 
-  >localhost:8080/api/game/user/create_user
+  >localhost:8080/api/game/player/create_player
 
-  >localhost:8080/api/game/user/update_user
+  >localhost:8080/api/game/player/update_player
 
-  >localhost:8080/api/game/user/search?name={name}
+  >localhost:8080/api/game/player/search?name={name}
 
 - Post requests:
-  >localhost:8080/api/game/user
+  >localhost:8080/api/game/player
 
-  >localhost:8080/api/game/user/saveUser
+  >localhost:8080/api/game/player/saveplayer
 
-  >localhost:8080/api/game/user/updateUser
+  >localhost:8080/api/game/player/updateplayer
 
 - Delete request:
-  >localhost:8080/api/game/user/delete/{userNumber}
+  >localhost:8080/api/game/player/delete/{playerNumber}
 
 - Put request:
-  >localhost:8080/api/game/user/{userNumber}
+  >localhost:8080/api/game/player/{playerNumber}
 
 ## Postman Collection
 
@@ -371,13 +371,13 @@ It is possible to send direct HTTP request (POST, DEL, PUT, GET) using something
 			"response": []
 		},
 		{
-			"name": "Add new user",
+			"name": "Add new player",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"userNumber\": 2,\r\n    \"name\": \"Curtis James\",\r\n    \"lastname\": \"Jackson II\",\r\n    \"numberPc\": 2\r\n}",
+					"raw": "{\r\n    \"playerNumber\": 2,\r\n    \"name\": \"Curtis James\",\r\n    \"lastname\": \"Jackson II\",\r\n    \"numberPc\": 2\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -385,7 +385,7 @@ It is possible to send direct HTTP request (POST, DEL, PUT, GET) using something
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/game/user",
+					"raw": "http://localhost:8080/api/game/player",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -394,20 +394,20 @@ It is possible to send direct HTTP request (POST, DEL, PUT, GET) using something
 					"path": [
 						"api",
 						"game",
-						"user"
+						"player"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Delete User",
+			"name": "Delete player",
 			"request": {
 				"method": "DELETE",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"userNumber\": 1,\r\n    \"name\": \"Veljko\",\r\n    \"lastname\": \"Fajnisevic\",\r\n    \"pcNumber\": 1\r\n}",
+					"raw": "{\r\n    \"playerNumber\": 1,\r\n    \"name\": \"Veljko\",\r\n    \"lastname\": \"Fajnisevic\",\r\n    \"pcNumber\": 1\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -415,7 +415,7 @@ It is possible to send direct HTTP request (POST, DEL, PUT, GET) using something
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/game/user/delete/2",
+					"raw": "http://localhost:8080/api/game/player/delete/2",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -424,7 +424,7 @@ It is possible to send direct HTTP request (POST, DEL, PUT, GET) using something
 					"path": [
 						"api",
 						"game",
-						"user",
+						"player",
 						"delete",
 						"2"
 					]
@@ -433,12 +433,12 @@ It is possible to send direct HTTP request (POST, DEL, PUT, GET) using something
 			"response": []
 		},
 		{
-			"name": "Get Users",
+			"name": "Get players",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/game/user",
+					"raw": "http://localhost:8080/api/game/player",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -447,19 +447,19 @@ It is possible to send direct HTTP request (POST, DEL, PUT, GET) using something
 					"path": [
 						"api",
 						"game",
-						"user"
+						"player"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Update User",
+			"name": "Update player",
 			"request": {
 				"method": "PUT",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/game/user/1?lastname=Portant&name=John",
+					"raw": "http://localhost:8080/api/game/player/1?lastname=Portant&name=John",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -468,7 +468,7 @@ It is possible to send direct HTTP request (POST, DEL, PUT, GET) using something
 					"path": [
 						"api",
 						"game",
-						"user",
+						"player",
 						"1"
 					],
 					"query": [
