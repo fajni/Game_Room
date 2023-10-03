@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.css">
+
+    <title>Please Sign Up</title>
+</head>
+<body>
+
+<!--CUSTOM USER SIGNUP FORM-->
+<br/>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+            <h1 class="text-center">Create New App User</h1>
+            <div class="card-body">
+
+                <form th:action="@{api/game/registration/saveAppUser}" th:object="${appUser}" method="POST">
+
+                    <div class="form-group">
+                        <label>First Name: </label>
+                        <input type="text" name="lastName" th:field="*{firstName}" placeholder="Enter First Name" class="form-control text-danger">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Last Name: </label>
+                        <input type="text" name="lastName" th:field="*{lastName}" placeholder="Enter Last Name" class="form-control text-danger">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email: </label>
+                        <input type="text" name="email" th:field="*{email}" placeholder="Enter Email" class="form-control text-danger">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Password: </label>
+                        <input type="password" name="password" th:field="*{password}" placeholder="Enter Password" class="form-control text-danger">
+                    </div>
+
+                    <div class="box-footer text-center">
+                        <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                    </div>
+
+                </form>
+                <hr/>
+                <a th:href="@{/api/game/registration}">Back to Log In</a>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

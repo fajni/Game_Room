@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.css">
 </head>
 <body>
-
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
     <div class="container">
         <!--<a class="navbar-brand" href="#">Home</a>-->
@@ -21,16 +20,24 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a th:href="@{/api/game/pc}" class="nav-link">PCs</a>
+                    <img alt="AccountSymbol" th:src="@{/images/account.png}" width="50" height="50" class="d-inline-block align-top img-thumbnail"/>
                 </li>
                 <li class="nav-item">
-                    <a th:href="@{/api/game/player}" class="nav-link">PLAYERs</a>
+                    <a th:href="@{/api/game/account}" class="nav-link" style="none">Account</a> <!--Account Name-->
                 </li>
                 <li class="nav-item">
-                    <a href="../About.html" class="nav-link">About</a>
+                    <div style="border-left: 2px solid gray; position: absolute; height: 40px;"></div>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/api/game/pc}" class="nav-link"><b>PCs</b></a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/api/game/player}" class="nav-link"><b>PLAYERs</b></a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/api/game/player/about}" class="nav-link">About</a>
                 </li>
             </ul>
 
@@ -52,7 +59,7 @@
     <div class="row">
         <div class="col-auto mr-auto">
             <h3>
-                <img alt="PlayerSymbol" th:src="@{/images/player.png}" width="50" height="50" class="img-thumbnail"/>
+                <img alt="PlayerSymbol" th:src="@{/images/player.jpg}" width="50" height="50" class="img-thumbnail"/>
                 List PLAYERs
             </h3>
         </div>

@@ -1,4 +1,4 @@
-package com.project.game.security;
+package com.project.game.database;
 
 import io.github.cdimascio.dotenv.Dotenv;
 import org.springframework.context.annotation.Bean;

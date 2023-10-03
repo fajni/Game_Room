@@ -22,21 +22,34 @@
 
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a th:href="@{/api/game/pc}" class="nav-link">PCs</a>
+                        <img alt="AccountSymbol" th:src="@{/images/account.png}" width="50" height="50" class="d-inline-block align-top img-thumbnail"/>
                     </li>
                     <li class="nav-item">
-                        <a th:href="@{/api/game/player}" class="nav-link">Users</a>
+                        <a th:href="@{/api/game/account}" class="nav-link" style="none">Account</a>
                     </li>
                     <li class="nav-item">
-                        <a href="../About.html" class="nav-link">About</a>
+                        <div style="border-left: 2px solid gray; position: absolute; height: 40px;"></div>
+                    </li>
+                    <li class="nav-item">
+                        <a th:href="@{/api/game/pc}" class="nav-link"><b>PCs</b></a>
+                    </li>
+                    <li class="nav-item">
+                        <a th:href="@{/api/game/player}" class="nav-link"><b>PLAYERs</b></a>
                     </li>
                 </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
             </div>
         </div>
     </nav>
+
+    <div class="container">
+        <br/>
+        <h2>About:</h2><br/>
+        <a href="https://github.com/fajni/Game-Room/"><h3>GitHub Repo.</h3></a>
+        <hr/>
+        <a href="https://github.com/fajni/Game-Room/tree/only_api"><h4>Only Api Without Login, Security and Email Part</h4></a>
+        <hr/>
+
+    </div>
+
 </body>
 </html>

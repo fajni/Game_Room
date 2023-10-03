@@ -105,4 +105,10 @@ public class PcController {
     ) {
         pcService.updatePc(pcNumber, title, status);
     }
+
+    @GetMapping("/about")
+    public ModelAndView about(){
+        ModelAndView model = new ModelAndView("About");//html file
+        return model;
+    }
 }

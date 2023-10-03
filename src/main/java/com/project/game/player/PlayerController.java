@@ -107,4 +107,10 @@ public class PlayerController {
                            @RequestParam(required = false) Long pcNumber) {
         playerService.updatePlayer(playerNumber, name, lastname, pcNumber);
     }
+
+    @GetMapping("/about")
+    public ModelAndView about(){
+        ModelAndView model = new ModelAndView("About");//html file
+        return model;
+    }
 }
