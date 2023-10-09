@@ -2,24 +2,18 @@ package com.project.game.registration;
 
 import com.project.game.appuser.AppUser;
 import com.project.game.appuser.AppUserService;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.util.Optional;
 
 @RestController
 @RequestMapping(path = {"api/game/registration", "api/game/"})
-@AllArgsConstructor
 public class RegistrationController {
 
-    private final RegistrationService registrationService;
-
-    private final AppUserService appUserService;
+    @Autowired
+    private RegistrationService registrationService;
+    @Autowired
+    private AppUserService appUserService;
 
     @PostMapping
     public String register(@RequestBody RegistrationRequest request){

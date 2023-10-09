@@ -1,16 +1,18 @@
 package com.project.game.registration.token;
 
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
-@AllArgsConstructor
 public class ConfirmationTokenService {
 
     private final ConfirmationTokenRepository tokenRepository;
+
+    public ConfirmationTokenService(ConfirmationTokenRepository tokenRepository) {
+        this.tokenRepository = tokenRepository;
+    }
 
     public void saveConfirmationToken(ConfirmationToken token) {
         tokenRepository.save(token);
@@ -20,12 +22,9 @@ public class ConfirmationTokenService {
         return tokenRepository.findByToken(token);
     }
 
-    public int setConfirmedAt(String token) {
-        return tokenRepository.updateConfirmedAt(token, LocalDateTime.now());
-    }
-
-    public void deleteConfirmationTokenByToken(String token) {
-        tokenRepository.deleteTokenByToken(token);
+    public void setConfirmedAt(String token) {
+        ConfirmationToken confirmationToken = tokenRepository.findByToken(token).get();
+        confirmationToken.setConfirmedAt(LocalDateTime.now());
     }
 
     public Optional<ConfirmationToken> getTokenByAppUserId(Long app_user_id){

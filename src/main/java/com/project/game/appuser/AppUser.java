@@ -1,7 +1,6 @@
 package com.project.game.appuser;
 
 import jakarta.persistence.*;
-import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,17 +8,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.Collections;
 
-@Getter
-@Setter
-@EqualsAndHashCode //equals()
-@NoArgsConstructor
-@AllArgsConstructor
-@Entity //table
+@Entity(name = "app_user")
 //application user itself
 public class AppUser implements UserDetails {
 
     @SequenceGenerator(
-            name="app_user_sequence",
+            name = "app_user_sequence",
             sequenceName = "app_user_sequence",
             allocationSize = 1
     )
@@ -34,8 +28,8 @@ public class AppUser implements UserDetails {
     private String email; //userName
     private String password;
     @Enumerated(EnumType.STRING)
-    private AppUserRole appUserRole; //enum
-    private Boolean locked = false; //da li je nalog zakljucan
+    private AppUserRole appUserRole;
+    private Boolean locked = false;
     private Boolean enabled = false;
 
     public AppUser(String firstName, String lastName, String email, String password, AppUserRole appUserRole) {
@@ -46,20 +40,12 @@ public class AppUser implements UserDetails {
         this.appUserRole = appUserRole;
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(appUserRole.name());
-        return Collections.singletonList(authority);
+    public AppUser(){
+        //need this constructor for @GetMapping("sign_up") request to store values
     }
 
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    @Override
-    public String getUsername() {
-        return email;
+    public Long getId() {
+        return id;
     }
 
     public String getFirstName() {
@@ -70,6 +56,64 @@ public class AppUser implements UserDetails {
         return lastName;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    public AppUserRole getAppUserRole() {
+        return appUserRole;
+    }
+
+    public Boolean getLocked() {
+        return locked;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setAppUserRole(AppUserRole appUserRole) {
+        this.appUserRole = appUserRole;
+    }
+
+    public void setLocked(Boolean locked) {
+        this.locked = locked;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
     @Override
     public boolean isAccountNonExpired() {
         return true;
@@ -77,6 +121,7 @@ public class AppUser implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
+        //return true;
         return !locked;
     }
 
@@ -91,14 +136,20 @@ public class AppUser implements UserDetails {
     }
 
     @Override
-    public String toString(){
-        return "\nID: "+getId()+
-                "\nFirst name: "+getFirstName()+
-                "\nLast name: "+getLastName()+
-                "\nEmail: "+getEmail()+
-                "\nPassword: "+getPassword()+
-                "\nRole: "+getAppUserRole()+
-                "\nLocked: "+getLocked()+
-                "\nEnabled: "+getEnabled();
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(appUserRole.name());
+        return Collections.singletonList(authority);
+    }
+
+    @Override
+    public String toString() {
+        return "\nID: " + id +
+                "\nFirst name: " + firstName +
+                "\nLast name: " + lastName +
+                "\nEmail: " + email +
+                "\nPassword: " + password +
+                "\nRole: " + appUserRole +
+                "\nLocked: " + locked +
+                "\nEnabled: " + enabled;
     }
 }

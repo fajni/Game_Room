@@ -1,10 +1,9 @@
 package com.project.game.security.config;
 
 import com.project.game.appuser.AppUserService;
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -15,14 +14,19 @@ import org.springframework.security.web.SecurityFilterChain;
 
 
 @Configuration
-@AllArgsConstructor
 @EnableWebSecurity
 public class WebSecurityConfig{
 
+    @Autowired
     private final AppUserService appUserService;
+    @Autowired
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @Primary
+    public WebSecurityConfig(AppUserService appUserService, BCryptPasswordEncoder bCryptPasswordEncoder) {
+        this.appUserService = appUserService;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+    }
+
     @Bean
     protected SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         return http
@@ -31,10 +35,11 @@ public class WebSecurityConfig{
                     auth.requestMatchers("/api/game/registration/**").permitAll(); //registration/**
                     auth.requestMatchers("/user").hasRole("USER");
                     auth.requestMatchers("/admin").hasRole("ADMIN");
+                    auth.requestMatchers("/admin").hasAnyAuthority("ADMIN");
                     auth.anyRequest().authenticated();
                 })
                 .formLogin(form -> form
-                        //.loginPage("/login") //za html
+                        //.loginPage("/login") //for html
                         .permitAll()
                 )
                 .httpBasic(Customizer.withDefaults())
