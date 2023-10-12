@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 
 @Configuration
@@ -39,7 +40,10 @@ public class WebSecurityConfig{
                     auth.anyRequest().authenticated();
                 })
                 .formLogin(form -> form
-                        //.loginPage("/login") //for html
+                        .loginPage("/api/game/sign_up")
+                        //.loginPage("/api/game/login") //for html
+                        .loginProcessingUrl("/api/game/login")
+                        .defaultSuccessUrl("/api/game/player")
                         .permitAll()
                 )
                 .httpBasic(Customizer.withDefaults())

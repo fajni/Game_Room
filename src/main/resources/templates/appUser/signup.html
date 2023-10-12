@@ -12,10 +12,10 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
-            <h1 class="text-center">Create New App User</h1>
+            <h1 class="text-center" style="background-color: rgb(245, 245, 245)">Create New App User</h1>
             <div class="card-body">
 
-                <form th:action="@{api/game/registration/saveAppUser}" th:object="${appUser}" method="POST">
+                <form th:action="@{/api/game/registration/saveAppUser}" th:object="${appUser}" method="POST">
 
                     <div class="form-group">
                         <label>First Name: </label>
@@ -38,12 +38,13 @@
                     </div>
 
                     <div class="box-footer text-center">
-                        <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                        <button type="submit" class="btn btn-primary btn-block">Register</button>
                     </div>
 
                 </form>
                 <hr/>
-                <a th:href="@{/api/game/registration}">Back to Log In</a>
+                <p>Already registered?</p>
+                <a th:href="@{/api/game/login}">Login here!</a>
 
             </div>
         </div>

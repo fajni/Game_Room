@@ -1,6 +1,5 @@
 package com.project.game.registration;
 
-import com.fasterxml.jackson.annotation.JacksonAnnotationsInside;
 import com.project.game.appuser.AppUser;
 import com.project.game.appuser.AppUserRole;
 import com.project.game.appuser.AppUserService;
@@ -28,9 +27,10 @@ public class RegistrationService {
     private EmailSender emailSender;
 
     public void addAppUser(AppUser appUser) {
+        appUser.setAppUserRole(AppUserRole.USER);
         appUserService.singUpUser(appUser);
         Optional<ConfirmationToken> token = confirmationTokenService.getTokenByAppUserId(appUser.getId());
-        String link = "http://localhost:8080/api/game/registration/confirm?token=" + token;
+        String link = "http://localhost:8080/api/game/registration/confirm?token=" + token.get().getToken();
         emailSender.send(appUser.getEmail(), buildEmail(appUser.getFirstName() + " " + appUser.getLastName(), link));
     }
 
@@ -47,7 +47,7 @@ public class RegistrationService {
 
         emailSender.send(request.getEmail(), buildEmail(request.getFirstName() + " " + request.getLastName(), link));
 
-        return appUser.toString()+"\nToken: "+token.get().getToken();
+        return appUser.toString() + "\nToken: " + token.get().getToken();
     }
 
     @Transactional
@@ -55,7 +55,7 @@ public class RegistrationService {
 
         ConfirmationToken confirmationToken = confirmationTokenService.getToken(token)
                 .orElseThrow(() -> new IllegalStateException("Token not found!"));
-        if (confirmationToken.getConfirmedAt() != null){
+        if (confirmationToken.getConfirmedAt() != null) {
             throw new IllegalStateException("Token (Email) already confirmed!");
         }
         AppUser appUser = appUserService.loadAppUserByEmail(confirmationToken.getAppUser().getEmail());
@@ -67,7 +67,7 @@ public class RegistrationService {
 
         confirmationTokenService.setConfirmedAt(token);
         appUserService.enableAppUser(confirmationToken.getAppUser().getId());
-        return "Token confirmed!\nAccount enabled: "+appUser.getEnabled();
+        return "Token confirmed!\nAccount enabled: " + appUser.getEnabled();
     }
 
     private String buildEmail(String name, String link) {
