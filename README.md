@@ -11,9 +11,11 @@ Main branch contains both parts as one project.
 <h2>Contents: </h2>
 
 - [Project requirements](#project-requirements)
+- [Main idea](#main-idea)
 - [Preparations](#preparations)
 - [Preview](#preview)
   - [Pics From Final Project](#pics-from-final-project)
+- [How to run](#how-to-run)
 - [Available endpoints](#available-endpoints)
 - [Wiki](#wiki)
 
@@ -36,6 +38,9 @@ Main branch contains both parts as one project.
 
 All the front-end is done by using [*Thymeleaf*](https://www.thymeleaf.org/) dependecy, simple HTML files with Bootstrap libraries.
 
+## Main idea
+
+The _"Game Room"_ project is designed to monitor the availability of eachPC and its current player. The provided tables present a list of available PCs and the Players currently using them. Player can't be stored into database/table if he's not using the PC.
 
 ## Preparations
 
@@ -68,7 +73,7 @@ GRANT ALL PRIVILEGES ON DATABASE "[<i>username</i>]" TO gameroom;</pre>
 
 ## Preview
 
-Person after registration becomes App User.
+Person after registration becomes the App User.
 
 <p align="center">
 <img alt = "pic" src="https://github.com/fajni/Game_Room/assets/87950386/6dcb7db8-2d05-47c7-b8bb-cc0c8d17aeb9" height="80%" width="80%"/>
@@ -79,18 +84,46 @@ Person after registration becomes App User.
   <summary>Pics</summary>
   <p align = "center">
     <br/>
+    <b>Registration and Login custom page.</b>
+    <img src="https://github.com/fajni/Game_Room/assets/87950386/c62923e0-e6dc-4a8b-8f6d-deaf634b20d3" name="Login_and_Registration" height="80%" width="80%"/>
+    <br/>
     <b>Email that has been send to Person's mail:</b><br/>
     <img src="https://github.com/fajni/Game_Room/assets/87950386/efb78b04-ba0e-4299-acf9-a187678f035a" name="Email that has been send!" height="50%" width="50%"/>
     <br/>
-    <b>Available PCs after succesfull registration. Same goes with Players.</b><br/>
+    <b>Available PCs after succesfull registration.</b> Same goes with Players.<br/>
     <img src="https://github.com/fajni/Game-Room/assets/87950386/5b29740e-aa4d-4bb7-b64b-28227bdce5c1" name="Available PCs after registration." height="50%" width="50%">
     <br/>
-    <img src="image-url" name="image-name">
   </p>
   <i>Note: Some pictures are outdated.</i>
 </details>
 
+## How to run
+
+Clone project: `git clone https://github.com/fajni/Game_Room.git`
+
+Clean Maven project: `mvn clean package` 
+
+Install Maven project.
+
+From _terminal_ locate youself in _"taget"_ folder (`cd target`), and run the application: `java -jar game-0.0.1-SNAPSHOT.jar`
+
+_Note:_ To run multiple instances it's necessary to specify a port for each one individually: `java -jar game-0.0.1-SNAPSHOT.jar --server.port=8081`
+
+<hr/>
+
+Generating the Site: `mvn site`
+
 ## Available endpoints
+
+RegistrationController:
+
+|Request|Link|
+|:---:|:---|
+|GET|`localhost:8080/api/game/login`|
+|GET|`localhost:8080/api/game/sign_up`|
+|GET|`localhost:8080/api/game/confirm?token={token}`|
+|---|---|
+|POST|`localhost:8080/api/game/saveAppUser`|
 
 PcController:
 
