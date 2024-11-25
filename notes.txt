@@ -1,0 +1,10 @@
+- Fetch Type = LAZY (On main page, you should get just PCs, not their Details. Same goes with Players),
+
+- User can see pcs and details but not players, Manager can see everything but can delete or update, and
+	Admin has CRUD operations.
+
+- Cascading - to handle cascading saves ... but NOT deletes.
+		- If you delete player, DO NOT delete pc,
+		- If you delete pc, ALSO DELETE player.
+
+- 
