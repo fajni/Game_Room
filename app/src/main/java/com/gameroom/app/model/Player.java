@@ -14,7 +14,7 @@ public class Player {
     @Column(name = "first_name")
     private String firstName;
 
-    @Column(name = "lastname")
+    @Column(name = "last_name")
     private String lastName;
 
     @OneToOne(

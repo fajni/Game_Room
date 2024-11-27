@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/extras/spring-security"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Add New PC</title>
+    <!--Bootstrap CSS-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.css">
+</head>
+<body class="container">
+    <br/>
+
+    <h2>ADD NEW PC: </h2>
+    <hr/>
+
+    <form th:actione="@{/save/pc}" method="POST">
+
+        <label>Pc Title: </label>
+        <input type="text" name="title" th:field="${pc.title}" placeholder="Enter PC Title">
+        <br/>
+
+        <label>Pc Active: </label>
+        <select th:field="${pc.active}">
+            <option th:value="true" th:text="true"/>
+            <option th:value="false" th:text="false"/>
+        </select>
+        <hr/>
+
+        <pre>Enter Pc Details (not required): </pre>
+
+        <label>CPU: </label>
+        <input type="text" name="cpu" th:field="${pcDetail.cpu}">
+        <br/>
+
+        <label>GPU: </label>
+        <input type="text" name="gpu" th:field="${pcDetail.gpu}">
+        <br/>
+
+        <label>OS: </label>
+        <input type="text" name="os" th:field="${pcDetail.os}">
+        <br/>
+
+        <label>RAM: </label>
+        <input type="text" name="ram" th:field="${pcDetail.ram}">
+        <br/>
+
+        <hr/>
+        <input type="submit" value="ADD">
+
+    </form>
+
+    <br/>
+    <a th:href="@{/pcs}">GO BACK</a>
+
+</body>
+</html>

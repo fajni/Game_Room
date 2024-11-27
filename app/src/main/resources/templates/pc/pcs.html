@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/extras/spring-security"
+>
+
+<!--Bootstrap CSS-->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.css">
+
+<head>
+    <meta charset="UTF-8">
+    <title>PCs</title>
+</head>
+<body class="container">
+    <br/>
+
+    <h2>ALL PCS:</h2>
+    <hr/>
+
+    <a th:href="@{/save/pc}" class="btn btn-success text-light">ADD NEW</a>
+    <br/>
+
+    <br/>
+    <table class="table table-bordered table-dark">
+        <thread>
+            <tr>
+                <th class="text-center">PC NUMBER</th>
+                <th class="text-center">TITLE</th>
+                <th class="text-center">ACTIVE</th>
+                <th class="text-center">PLAYER</th>
+                <th class="text-center">ACTIONS</th>
+            </tr>
+        </thread>
+
+        <tbody>
+        <tr th:each="pc: ${pcs}">
+            <td th:text="${pc.pcNumber}"></td>
+            <td th:text="${pc.title}"></td>
+            <td th:text="${pc.active}"></td>
+            <td th:text="${pc.player != null ? pc.player.playerId : '/'}"></td>
+            <td class="text-center">
+                <a th:href="@{/remove/pc/{pcNumber}(pcNumber=${pc.pcNumber})}"
+                   class="btn btn-danger btn-sm">REMOVE</a>
+                <a th:href="@{/update/pc/{pcNumber}(pcNumber=${pc.pcNumber})}"
+                   class="btn btn-warning btn-sm">UPDATE</a>
+                <a th:href="@{/pcs/{pcNumber}(pcNumber=${pc.pcNumber})}"
+                   class="btn btn-info btn-sm">DETAILS</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a th:href="@{/home}">HOME</a>
+
+</body>
+</html>

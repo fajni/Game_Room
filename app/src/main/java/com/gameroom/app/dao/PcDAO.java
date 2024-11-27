@@ -20,84 +20,30 @@ public class PcDAO {
         this.entityManager = entityManager;
     }
 
-    @Transactional
-    public boolean savePc(Pc pc) {
+    public void savePc(Pc pc) {
 
-        try {
-            entityManager.persist(pc);
-        } catch (Exception e) {
-            System.err.println("Could NOT SAVE PC - " + pc.toString());
-            return false;
-        }
-
-        return true;
-    }
-
-    @Transactional
-    public boolean savePcWithPcDetails(Pc pc, PcDetail pcDetail) {
-
-        pc.setPcDetail(pcDetail);
-
-        try {
-            entityManager.persist(pc);
-        } catch (Exception e) {
-            System.err.println("Could NOT save PC - " + pc.toString());
-            return false;
-        }
-
-        return true;
+        entityManager.persist(pc);
     }
 
     public Pc findPcById(Long id) {
 
-        Pc pc = null;
-
-        try {
-            pc = entityManager.find(Pc.class, id);
-        } catch (Exception e) {
-            System.err.println("Could NOT FIND Pc with " + id + " id!");
-        }
-        return pc;
+        return entityManager.find(Pc.class, id);
     }
 
     public List<Pc> findAllPcs() {
 
         TypedQuery<Pc> query = entityManager.createQuery("SELECT p FROM Pc p", Pc.class);
-        List<Pc> pcs = null;
-
-        try {
-            pcs = query.getResultList();
-        } catch (Exception e) {
-            System.err.println("Could NOT FIND Pcs");
-        }
-
-        return pcs;
+        return query.getResultList();
     }
 
-    @Transactional
-    public boolean deletePcById(Long id) {
+    public void deletePcById(Long id) {
 
-        try {
-            Pc pc = entityManager.find(Pc.class, id);
-            entityManager.remove(pc);
-        } catch (Exception e) {
-            System.err.println("Could NOT DELETE Pc with " + id + " id!");
-            return false;
-        }
-
-        return true;
+        Pc pc = entityManager.find(Pc.class, id);
+        entityManager.remove(pc);
     }
 
-    @Transactional
-    public Pc updatePc(Pc pc) {
+    public void updatePc(Pc pc) {
 
-        try {
-            entityManager.merge(pc);
-        } catch (Exception e) {
-            System.err.println("Could NOT UPDATE Pc " + pc.toString());
-            return null;
-        }
-
-        return pc;
+        entityManager.merge(pc);
     }
 }

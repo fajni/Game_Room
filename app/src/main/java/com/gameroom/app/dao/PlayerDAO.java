@@ -19,60 +19,25 @@ public class PlayerDAO {
         this.entityManager = entityManager;
     }
 
-    @Transactional
-    public boolean savePlayer(Player player) {
+    public void savePlayer(Player player) {
 
-        try {
-            entityManager.persist(player);
-        } catch (Exception e) {
-            System.err.println("Could NOT SAVE Player " + player.toString());
-            return false;
-        }
-
-        return true;
+        entityManager.persist(player);
     }
 
     public Player findPlayerById(Long id) {
 
-        Player player = null;
-
-        try {
-            player = entityManager.find(Player.class, id);
-        } catch (Exception e) {
-            System.err.println("Could NOT FIND Player with " + id + " id!");
-        }
-
-        return player;
+        return entityManager.find(Player.class, id);
     }
 
     public List<Player> findAllPlayers() {
 
         TypedQuery<Player> query = entityManager.createQuery("SELECT p FROM Player p", Player.class);
-        List<Player> players = null;
-
-        try {
-            players = query.getResultList();
-        } catch (Exception e) {
-            System.err.println("Could NOT FIND Players!");
-        }
-
-        return players;
+        return query.getResultList();
     }
 
-    @Transactional
-    public boolean deletePlayerById(Long id) {
+    public void deletePlayerById(Long id) {
 
-        try {
-
-            Player player = entityManager.find(Player.class, id);
-            entityManager.remove(player);
-
-        } catch (Exception e) {
-
-            System.err.println("Could NOT DELETE Player with " + id + " id!");
-            return false;
-        }
-
-        return true;
+        Player player = entityManager.find(Player.class, id);
+        entityManager.remove(player);
     }
 }

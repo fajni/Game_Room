@@ -1,5 +1,6 @@
 package com.gameroom.app.model;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 
 @Entity
@@ -21,7 +22,7 @@ public class Pc {
             fetch = FetchType.LAZY,
             cascade = {
                     CascadeType.REFRESH, CascadeType.DETACH,
-                    CascadeType.PERSIST, CascadeType.MERGE
+                    CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE
             },
             mappedBy = "pc"
     )

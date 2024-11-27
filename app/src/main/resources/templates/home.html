@@ -1,14 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/extras/spring-security"
+>
 <head>
     <meta charset="UTF-8">
     <title>Home Page</title>
+
+    <!--Bootstrap CSS-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.css">
 </head>
-<body>
+<body class="container">
+    <br/>
 
-    <h1>This page can see every logged-in user.</h1>
+    <h2>This page can see every logged-in user.</h2>
 
-    <p>Table with PCs and current Player on each!</p>
+    <a th:href="@{/pcs}">CHECK ALL PCS</a>
+    <br/>
+    <a th:href="@{/players}">CHECK ALL PLAYERS</a>
 
 </body>
 </html>

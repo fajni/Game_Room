@@ -4,48 +4,31 @@
 
 # Content:
 
+- [Project](#project)
 - [ER Diagram](#er-diagram)
-- [DAO Methods](#dao-methods)
-  - [Pc methods](#pc-methods)
-  - [Pc Detail methods](#pcdetail-methods)
-  - [Player methods](#player-methods)
+- [Images](#images)
+- [More about this project](#more-about-this-project)
+
+# Project
+
+- Spring Boot Version: 
+- Java Version: 
+- Dependencies:
+  - Spring Boot JPA,
+  - MySQL Driver,
+  - Spring Web,
+  - Thymeleaf,
+  - Spring Security
+- Bootstrap
 
 # ER Diagram
 
 <img src="./other/er.png" />
 
-| Relationship     | Association    | Fetch Type | Description                                                                                                                            |
-|------------------|----------------|------------|----------------------------------------------------------------------------------------------------------------------------------------|
-| pcs - pc_details | Bi-directional | LAZY       | If pc deleted also delete his pc details. If pc details deleted, don't delete pc.<br/> If we save pc, also save his details if linked. |
-| pcs - players    | Bi-directional | LAZY       | If player deleted, don't delete pc. If pc deleted also delete player.<br/> If we save player, don't save pc.                           |
+# Images
 
-# DAO Methods
 
-## Pc methods
 
-| Method                                          | Return    |
-|-------------------------------------------------|-----------|
-| savePcWithPcDetails(Pc pc, PcDetails pcDetails) | boolean   |
-| savePc(Pc pc)                                   | boolean   |
-| findPcById(Long id)                             | Pc        |
-| findAllPcs()                                    | List< Pc> |
-| deletePcById(Long id)                           | boolean   |
-| updatePc(Pc pc)                                 | Pc        |
+# More about this project
 
-## PcDetail methods
-
-| Method |
-|--------|
-| /      |
-
-PcDetail methods not implemented - reason: cascading.
-
-## Player methods
-
-| Method                     | Return        |
-|----------------------------|---------------|
-| savePlayer(Player player)  | boolean       |
-| findPlayerById(Long id)    | Player        |
-| findAllPlayers()           | List< Player> |
-| deletePlayerById(Long id)  | boolean       | 
-
+For more, check file: <a href = "./More_README.md">More_README.md</a>

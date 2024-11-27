@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/extras/spring-security"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>PC Details</title>
+    <!--Bootstrap CSS-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.css">
+</head>
+<body class="container">
+    <br/>
+
+    <div class="card">
+
+        <div class="card-header">
+            PC NUMBER: <p th:text="${pc.pcNumber}"/>
+        </div>
+
+        <div class="card-body">
+            <p>PC ACTIVE:</p>
+            <p th:text="${pc.active}"/>
+            <br/>
+            <p>PC TITLE:</p>
+            <p th:text="${pc.title}"/>
+            <br/>
+            <p>PC DETAILS: </p>
+            <p th:text="${pc.pcDetail}"/>
+            <br/>
+            <p>PC PLAYER:</p>
+            <p th:text="${pc.player}"/>
+        </div>
+
+    </div>
+
+    <br/>
+
+    <a th:href="@{/pcs}">GO BACK</a>
+
+</body>
+</html>
