@@ -119,7 +119,6 @@ public class PcController {
     @PostMapping("/form/update/pc/{pcNumber}")
     public String updatePcGet(@ModelAttribute("pc") Pc pc, @ModelAttribute("pcDetail") PcDetail pcDetail) {
 
-
         System.out.println("\nUpdated Pc: " + pc.toString());
         System.out.println("Updated Pc Details: " + pcDetail.toString());
 

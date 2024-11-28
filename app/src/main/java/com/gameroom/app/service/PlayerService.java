@@ -36,7 +36,7 @@ public class PlayerService {
 
         Player player = null;
 
-        try{
+        try {
             player = playerDAO.findPlayerById(id);
         } catch (Exception e) {
             System.err.println("Could NOT FIND Player with " + id + " id!");
@@ -49,7 +49,7 @@ public class PlayerService {
 
         List<Player> players = null;
 
-        try{
+        try {
             players = playerDAO.findAllPlayers();
         } catch (Exception e) {
             System.err.println("Could NOT FIND Players!");
@@ -62,7 +62,7 @@ public class PlayerService {
     @Transactional
     public boolean deletePlayerById(Long id) {
 
-        try{
+        try {
             playerDAO.deletePlayerById(id);
         } catch (Exception e) {
 
@@ -71,5 +71,18 @@ public class PlayerService {
         }
 
         return true;
+    }
+
+    @Transactional
+    public Player updatePlayer(Player player) {
+
+        try {
+            playerDAO.updatePlayer(player);
+        } catch (Exception e) {
+            System.err.println("Could NOT UPDATE Player: " + player.toString());
+            return null;
+        }
+
+        return player;
     }
 }

@@ -40,4 +40,9 @@ public class PlayerDAO {
         Player player = entityManager.find(Player.class, id);
         entityManager.remove(player);
     }
+
+    public void updatePlayer(Player player) {
+
+        entityManager.merge(player);
+    }
 }

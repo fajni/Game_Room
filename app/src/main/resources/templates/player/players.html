@@ -6,8 +6,49 @@
 <head>
     <meta charset="UTF-8">
     <title>Players</title>
+    <!--Bootstrap CSS-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.css">
 </head>
-<body>
+<body class="container">
+    <br/>
+
+    <h2>ALL PLAYERS: </h2>
+    <hr/>
+
+    <a th:href="@{/save/player}" class="btn btn-success text-light">ADD NEW</a>
+    <br/>
+
+    <br/>
+    <table class="table table-bordered table-dark">
+        <thread>
+            <tr>
+                <th>PLAYER ID</th>
+                <th>FIRST NAME</th>
+                <th>LAST NAME</th>
+                <th>PC NUMBER</th>
+                <th>ACTION</th>
+            </tr>
+        </thread>
+
+        <tbody>
+        <tr th:each="player: ${players}">
+            <td th:text="${player.playerId}"></td>
+            <td th:text="${player.firstName}"></td>
+            <td th:text="${player.lastName}"></td>
+            <td th:text="${player.pc.pcNumber}"></td>
+            <td class="text-center">
+                <a th:href="@{/remove/player/{playerId}(playerId=${player.playerId})}"
+                   class="btn btn-danger btn-sm">REMOVE</a>
+                <a th:href="@{/update/player/{playerId}(playerId=${player.playerId})}"
+                   class="btn btn-warning btn-sm">UPDATE</a>
+                <a th:href="@{/players/{playerId}(playerId=${player.playerId})}"
+                   class="btn btn-info btn-sm">DETAILS</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a th:href="@{/home}">HOME</a>
 
 </body>
 </html>

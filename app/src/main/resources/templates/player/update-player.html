@@ -1,10 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/extras/spring-security"
+>
+<!--Bootstrap CSS-->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.css">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Update Player</title>
 </head>
-<body>
+<body class="container">
+    <br/>
+
+    <h2>Update Player: </h2>
+
+    <form th:action="@{/form/update/player/{playerId}(playerId=${player.playerId})}" method="POST">
+
+        <label>Player Id:</label>
+        <input style="text" name="playerId" th:field="${player.playerId}" readonly>
+        <br/>
+
+        <label>Player First Name: </label>
+        <input style="text" name="firstName" th:field="${player.firstName}" placeholder="Update first name"/>
+        <br/>
+
+        <label>Player Last Name: </label>
+        <input style="text" name="lastName" th:field="${player.lastName}" placeholder="Update last name"/>
+        <br/>
+
+        <label>Player's PC: </label>
+        <input style="text" name="pc" th:field="${player.pc.pcNumber}" readonly/>
+        <input style="text" name="pc" th:field="${player.pc.title}" readonly/>
+        <input style="text" name="pc" th:field="${player.pc.active}" readonly/>
+
+        <hr/>
+        <input type="submit" value="UPDATE">
+
+    </form>
+
+    <br/>
+    <a th:href="@{/players}">Go Back</a>
 
 </body>
 </html>

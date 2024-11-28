@@ -1,10 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/extras/spring-security"
+>
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Add New Player</title>
+    <!--Bootstrap CSS-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.css">
 </head>
-<body>
+<body class="container">
+    <br/>
+
+    <h2>ADD NEW PLAYER: </h2>
+    <hr/>
+
+    <form th:actione="@{/save/player}" method="POST">
+
+        <label>First name: </label>
+        <input type="text" name="firstName" th:field="${player.firstName}" />
+        <br/>
+
+        <label>Last name: </label>
+        <input type="text" name="lastName" th:field="${player.lastName}" />
+        <br/>
+
+        <label>Select Available PC: </label>
+        <select th:field="${player.pc.pcNumber}">
+            <option
+                    th:each="pc : ${pcs}"
+                    th:value="${pc}"
+                    th:text="${pc}"
+            />
+        </select>
+        <br/>
+
+        <hr/>
+        <input type="submit" value="ADD">
+
+    </form>
+
+    <br/>
+    <a th:href="@{/players}">GO BACK</a>
 
 </body>
 </html>

@@ -58,6 +58,16 @@
 
 ## PlayerController
 
-
+| Request      | Link                                         | Description                                                                                                              |
+|--------------|----------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|
+| GET          | localhost:8080/players                       | Show all players.<br/>Every logged user can see.                                                                         |
+| GET          | localhost:8080/players/{playerId}            | Show Details about player. <br/>Every logged user can see.                                                               |
+| GET (DELETE) | localhost:8080/remove/player/{playerId}      | Delete player. <br/>Only Admins can delete player.<br/> Reason why delete with GET: html form can't send DELETE request. |
+| DELETE       | localhost:8080/remove/player/{playerId}      | Delete player. <br/>Only Admins can send delete request.                                                                 |
+| GET          | localhost:8080/save/player                   | Show form for ADDING a new player. <br/> Only Managers & Admins can see.                                                 |
+| POST         | localhost:8080/save/player                   | Save player. <br/> Only Managers & Admins can save new player.                                                           |
+| GET          | localhost:8080/update/player/{playerId}      | Show form for UPDATING the player.<br/>Only Managers & Admins can see.                                                   |
+| PUT          | localhost:8080/update/player/{playerId}      | Update player.<br/>Only Managers & Admins can update player.                                                             |
+| POST         | localhost:8080/form/update/player/{playerId} | Update player.<br/> Only Mangers & Admins can update player.<br/> Same reason with DELETE request.                       |
 
 # Images
