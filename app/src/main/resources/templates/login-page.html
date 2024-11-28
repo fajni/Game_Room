@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+    <!--Bootstrap CSS-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.css">
+</head>
+<body class="container">
+    <br/>
+
+    <h3>LOGIN PAGE</h3>
+    <hr/>
+
+    <form th:action="@{/authenticateTheUser}" method="POST">
+
+        <p>
+            Username: <input type="text" placeholder="username" name="username" />
+        </p>
+
+        <p>
+            Password: <input type="password" placeholder="password" name="password" />
+        </p>
+
+        <input type="submit" value="LOGIN" class="btn btn-success" />
+
+        <hr/>
+
+        <a th:href="@{/showRegisterPage}" class="btn btn-info text-light">Don't have an account? Sign up</a>
+    </form>
+
+</body>
+</html>

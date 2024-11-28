@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Landing Page</title>
+    <!--Bootstrap CSS-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.css">
 </head>
-<body>
+<body class="container">
+    <br/>
 
     <h2>This is landing page! Welcome!</h2>
 
@@ -12,9 +15,9 @@
 
     <hr/>
 
-    <a href="#">Login</a>
+    <a th:href="@{/showLoginPage}">Login</a>
     <br/>
-    <a href="#">Register</a>
+    <a th:href="@{/showRegisterPage}">Register</a>
 
 </body>
 </html>

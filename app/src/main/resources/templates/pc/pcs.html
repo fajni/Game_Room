@@ -39,9 +39,9 @@
             <td th:text="${pc.active}"></td>
             <td th:text="${pc.player != null ? pc.player.playerId : '/'}"></td>
             <td class="text-center">
-                <a th:href="@{/remove/pc/{pcNumber}(pcNumber=${pc.pcNumber})}"
+                <a sec:authorize="hasRole('ADMIN')" th:href="@{/remove/pc/{pcNumber}(pcNumber=${pc.pcNumber})}"
                    class="btn btn-danger btn-sm">REMOVE</a>
-                <a th:href="@{/update/pc/{pcNumber}(pcNumber=${pc.pcNumber})}"
+                <a sec:authorize="hasRole('ADMIN') or hasRole('MANAGER')" th:href="@{/update/pc/{pcNumber}(pcNumber=${pc.pcNumber})}"
                    class="btn btn-warning btn-sm">UPDATE</a>
                 <a th:href="@{/pcs/{pcNumber}(pcNumber=${pc.pcNumber})}"
                    class="btn btn-info btn-sm">DETAILS</a>

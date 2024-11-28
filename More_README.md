@@ -2,15 +2,22 @@
 <i>"Game Room"</i> Project <img alt="SpringBoot" src="https://spring.io/img/logos/spring-initializr.svg" width=5% height=5%/>
 </h1>
 
+Spring Boot MVC web application with Spring Boot Security. 
+Manage PCs and Players.
+
+This project is not made to look good visually, but to be functional.
+
 # Content:
 
 - [Project](#project)
-- [ER Diagram](#er-diagram)
-- [DAO Methods](#dao-methods)
-  - [Pc methods](#pc-methods)
-  - [Pc Detail methods](#pcdetail-methods)
-  - [Player methods](#player-methods)
-- [Images](#images)
+- [ER Diagrams](#er-diagrams)
+  - [Login/Registration](#loginregistration)
+- [Endpoints](#endpoints)
+  - [Demo Controller](#democontroller)
+  - [Pc Controller](#pccontroller)
+  - [Player Controller](#playercontroller)
+  - [Login/Registration Controller](#loginregistrationcontroller)
+- [Project Description](#project-description)
 
 # Project
 
@@ -24,7 +31,28 @@
   - Spring Security
 - Bootstrap
 
-# ER Diagram
+<br/>
+
+<details>
+<summary>IMAGES</summary>
+
+  <img src="./other/landing-page.png"/>
+
+  <img src="./other/login-page.png"/>
+
+  <img src="./other/registration-page.png"/>
+
+  <img src="./other/home-page.png"/>
+
+  <img src="./other/employee-pc.png"/>
+
+  <img src="./other/manager-pc.png"/>
+
+  <img src="./other/admin-pc.png"/>
+
+</details>
+
+# ER Diagrams
 
 <img src="./other/er.png" />
 
@@ -32,6 +60,10 @@
 |------------------|----------------|------------|----------------------------------------------------------------------------------------------------------------------------------------|
 | pcs - pc_details | Bi-directional | LAZY       | If pc deleted also delete his pc details. If pc details deleted, don't delete pc.<br/> If we save pc, also save his details if linked. |
 | pcs - players    | Bi-directional | LAZY       | If player deleted, don't delete pc. If pc deleted also delete player.<br/> If we save player, don't save pc.                           |
+
+## Login/Registration
+
+<img src="./other/users-roles.png"/>
 
 # Endpoints
 
@@ -70,4 +102,15 @@
 | PUT          | localhost:8080/update/player/{playerId}      | Update player.<br/>Only Managers & Admins can update player.                                                             |
 | POST         | localhost:8080/form/update/player/{playerId} | Update player.<br/> Only Mangers & Admins can update player.<br/> Same reason with DELETE request.                       |
 
-# Images
+## LoginRegistrationController
+
+| Request | Link                            | Description         |
+|---------|---------------------------------|---------------------|
+| GET     | localhost:8080/showLoginPage    | Login page.         |
+| GET     | localhost:8080/showRegisterPage | Registration page.  |
+| GET     | localhost:8080/access-denied    | Access Denied page. |
+| POST    | localhost:8080/logout           | User logout.        |
+| POST    | localhost:8080/register         | Add/Save new user.  |
+
+# Project Description
+
