@@ -10,6 +10,7 @@ This project is not made to look good visually, but to be functional.
 # Content:
 
 - [Project](#project)
+- [Project Description](#project-description)
 - [ER Diagrams](#er-diagrams)
   - [Login/Registration](#loginregistration)
 - [Endpoints](#endpoints)
@@ -17,7 +18,7 @@ This project is not made to look good visually, but to be functional.
   - [Pc Controller](#pccontroller)
   - [Player Controller](#playercontroller)
   - [Login/Registration Controller](#loginregistrationcontroller)
-- [Project Description](#project-description)
+- [To Do](#to-do)
 
 # Project
 
@@ -52,6 +53,13 @@ This project is not made to look good visually, but to be functional.
 
 </details>
 
+
+# Project Description
+
+The "Game Room" project is designed to monitor the availability of each PC, its details and current player.
+Provided tables present a list of available PCs, their Details and the Players currently using them.
+Player can't be stored into database/table if he's not using the PC.
+
 # ER Diagrams
 
 <img src="./other/er.png" />
@@ -69,10 +77,11 @@ This project is not made to look good visually, but to be functional.
 
 ## DemoController
 
-| Request | Link                 | Description                                         |
-|---------|----------------------|-----------------------------------------------------|
-| GET     | localhost:8080       | Landing page.<br/>Everyone can see this page.       |
-| GET     | localhost:8080/home  | Home page.<br/>Only logged users can see this page. |
+| Request | Link                    | Description                                          |
+|---------|-------------------------|------------------------------------------------------|
+| GET     | localhost:8080          | Landing page.<br/>Everyone can see this page.        |
+| GET     | localhost:8080/home     | Home page.<br/>Only logged users can see this page.  |
+| GET     | localhost:8080/account  | Your account page. _(username, password, role, ...)_ |
 
 ## PcController
 
@@ -112,5 +121,6 @@ This project is not made to look good visually, but to be functional.
 | POST    | localhost:8080/logout           | User logout.        |
 | POST    | localhost:8080/register         | Add/Save new user.  |
 
-# Project Description
+# TO DO
 
+JWT, Spring Email, 

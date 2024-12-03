@@ -5,24 +5,30 @@
 >
 <head>
     <meta charset="UTF-8">
-    <title>Home Page</title>
+    <title>Account</title>
 
-    <!--Bootstrap CSS-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.css">
 </head>
 <body class="container">
     <br/>
 
-    <h2>This page can see every logged-in user.</h2>
+    <h3>User ID: </h3>
+    <h3 th:text="${user.userId}"/>
+    <hr/>
+    <h4>Username: </h4>
+    <h4 th:text="${user.username}"/>
+    <hr/>
+    <h4>Email: </h4>
+    <h4 th:text="${user.email}"/>
+    <hr/>
+    <h4>Current password: </h4>
+    <h4 th:text="${user.password}"/>
+    <hr/>
+    <h4>ROLE: </h4>
+    <h4 th:text="${user.role.roleName}"/>
     <hr/>
 
-    <a th:href="@{/pcs}">CHECK ALL PCS</a>
-    <br/>
-    <a th:href="@{/players}">CHECK ALL PLAYERS</a>
-
-    <hr/>
-
-    <a th:href="@{/account}" class="btn btn-primary">My Account</a>
+    <a th:href="@{/home}">Go Back</a>
 
     <br/><br/>
 
