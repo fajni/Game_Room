@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/extras/spring-security"
+>
 <head>
     <meta charset="UTF-8">
     <title>Landing Page</title>
@@ -15,9 +18,19 @@
 
     <hr/>
 
-    <a th:href="@{/showLoginPage}">Login</a>
-    <br/>
-    <a th:href="@{/showRegisterPage}">Register</a>
+    <div sec:authorize="!hasRole('ADMIN') and !hasRole('EMPLOYEE') and !hasRole('MANAGER')">
+        <a th:href="@{/showLoginPage}">Login</a>
+        <br/>
+        <a th:href="@{/showRegisterPage}">Register</a>
+    </div>
+
+    <div sec:authorize="hasRole('ADMIN') or hasRole('EMPLOYEE') or hasRole('MANAGER')">
+        <a th:href="@{/home}">HOME PAGE</a>
+        <br/><br/>
+        <form th:action="@{/logout}" method="POST">
+            <input type="submit" value="LOGOUT" />
+        </form>
+    </div>
 
 </body>
 </html>

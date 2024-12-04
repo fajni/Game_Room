@@ -37,7 +37,7 @@ public class GameRoomSecurityConfig {
                         configurer
                                 .requestMatchers("/showLoginPage", "/showRegisterPage", "/users/**", "/register/**", "/", "/logout").permitAll()
 
-                                .requestMatchers("/home", "/pcs/**" , "/players/**").hasAnyRole("EMPLOYEE", "MANAGER", "ADMIN")
+                                .requestMatchers("/home", "/pcs/**" , "/players/**", "/account/**").hasAnyRole("EMPLOYEE", "MANAGER", "ADMIN")
 
                                 .requestMatchers("/save/**", "/update/**", "/form/**").hasAnyRole("MANAGER", "ADMIN")
 

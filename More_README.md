@@ -123,4 +123,4 @@ Player can't be stored into database/table if he's not using the PC.
 
 # TO DO
 
-JWT, Spring Email, 
+JWT, Spring Email, Pagination, 
