@@ -37,19 +37,40 @@ This project is not made to look good visually, but to be functional.
 <details>
 <summary>IMAGES</summary>
 
+- Landing page:
+
   <img src="./other/landing-page.png"/>
+  <hr/>
+
+- Login page:
 
   <img src="./other/login-page.png"/>
+  <hr/>
+
+- Registration page:
 
   <img src="./other/registration-page.png"/>
+  <hr/>
+
+- Home page:
 
   <img src="./other/home-page.png"/>
+  <hr/>
+
+- Employee PC View (_Same with Employee Player View_):
 
   <img src="./other/employee-pc.png"/>
+  <hr/>
+
+- Manager PC View (_Same with Manager Player View_):
 
   <img src="./other/manager-pc.png"/>
+  <hr/>
+
+- Admin PC View (_Same with Admin Player View_):
 
   <img src="./other/admin-pc.png"/>
+  <hr/>
 
 </details>
 

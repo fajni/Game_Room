@@ -2,6 +2,7 @@ package com.gameroom.app.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
@@ -33,7 +34,15 @@ public class GameRoomSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
 
-        http.authorizeHttpRequests(configurer ->
+        http
+
+                // for RestController (disable Cross Site Request Forgery):
+                .csrf(httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer.disable())
+
+                // use HTTP Basic Authentication
+                .httpBasic(Customizer.withDefaults())
+
+                .authorizeHttpRequests(configurer ->
                         configurer
                                 .requestMatchers("/showLoginPage", "/showRegisterPage", "/users/**", "/register/**", "/", "/logout").permitAll()
 
