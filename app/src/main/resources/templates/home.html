@@ -19,6 +19,11 @@
     <a th:href="@{/pcs}">CHECK ALL PCS</a>
     <br/>
     <a th:href="@{/players}">CHECK ALL PLAYERS</a>
+    <br/>
+    <a th:href="@{/accounts}"
+       sec:authorize="hasRole('ADMIN') or hasRole('MANAGER')" >
+        CHECK ALL ACCOUNTS
+    </a>
 
     <hr/>
 

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>All Registered Accounts</title>
+</head>
+<body>
+
+    <h1>All Registered Accounts: </h1>
+    <hr/>
+
+    <ul>
+        <li th:each="account : ${accounts}" th:text="${account}"
+            style="margin-bottom: 1rem"></li>
+    </ul>
+
+    <hr/>
+
+    <a th:href="@{/home}">Go Back</a>
+
+</body>
+</html>

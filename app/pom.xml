@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.gameroom</groupId>
-	<artifactId>app</artifactId>
+	<artifactId>game_room</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Game Room</name>
 	<description>Application for simple Game Room tracking</description>

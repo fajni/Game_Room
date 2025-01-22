@@ -7,15 +7,17 @@ This project is not made to look good visually, but to be functional.
 
 # Content:
 
+- [Prerequisites](#prerequisites)
 - [Project](#project)
+  - [Project Description](#project-description)
 - [ER Diagrams](#er-diagrams)
   - [Login/Registration](#loginregistration)
 - [More about this project](#more-about-this-project)
 
-# Project
+# Prerequisites
 
-- Spring Boot Version: 
-- Java Version: 
+- Spring Boot Version: 3.4.0
+- Java SE 23,
 - Dependencies:
   - Spring Boot JPA,
   - MySQL Driver,
@@ -24,7 +26,9 @@ This project is not made to look good visually, but to be functional.
   - Spring Security
 - Bootstrap
 
-<br/>
+# Project
+
+Images from final projects:
 
 <details>
 <summary>IMAGES</summary>
@@ -65,6 +69,12 @@ This project is not made to look good visually, but to be functional.
   <hr/>
 
 </details>
+
+## Project Description
+
+The "Game Room" project is designed to monitor the availability of each PC, its details and current player.
+Provided tables present a list of available PCs, their Details and the Players currently using them.
+Player can't be stored into database/table if not using the PC.
 
 # ER Diagrams
 
