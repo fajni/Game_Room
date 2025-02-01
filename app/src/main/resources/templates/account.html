@@ -32,6 +32,12 @@
 
     <br/><br/>
 
+    <form th:action="@{/account/delete/{userId}(userId=${user.userId})}" method="POST">
+        <input type="submit" value="DELETE YOUR ACCOUNT" class="btn btn-danger btn-sm">
+    </form>
+
+    <br/><br/>
+
     <form th:action="@{/logout}" method="POST">
         <input type="submit" value="LOGOUT" />
     </form>

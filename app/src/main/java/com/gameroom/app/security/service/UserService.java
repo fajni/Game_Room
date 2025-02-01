@@ -44,6 +44,12 @@ public class UserService {
         return true;
     }
 
+    @Transactional
+    public boolean deleteUser(Long userId) {
+
+        return userDAO.deleteUser(userId);
+    }
+
     public User findUserByUsername(String username) {
 
         User user = null;

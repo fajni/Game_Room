@@ -61,4 +61,22 @@ public class UserDAO {
         return query.getResultList();
     }
 
+    public boolean deleteUser(Long userId) {
+
+        User user = null;
+
+        try{
+
+            user = entityManager.find(User.class, userId);
+            entityManager.remove(user);
+
+            return true;
+
+        } catch (Exception e) {
+            System.err.println("Could NOT DELETE User - " + userId + "; " + e.getMessage());
+
+            return false;
+        }
+    }
+
 }

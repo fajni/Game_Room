@@ -20,14 +20,14 @@ public class GameRoomSecurityConfig {
 
         JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
 
-        // query to retrieve a user by username
+        // query to retrieve a user by email
         jdbcUserDetailsManager.setUsersByUsernameQuery(
-                "SELECT u.username, u.password, true as enabled FROM users u WHERE u.username=?"
+                "SELECT u.email, u.password, true as enabled FROM users u WHERE u.email=?"
         );
 
-        //query to retrieve the roles by username
+        //query to retrieve the roles by email
         jdbcUserDetailsManager.setAuthoritiesByUsernameQuery(
-                "SELECT u.username, r.role_name FROM users u, roles r WHERE u.username=? AND u.user_id=r.user_id"
+                "SELECT u.email, r.role_name FROM users u, roles r WHERE u.email=? AND u.user_id=r.user_id"
         );
 
         return jdbcUserDetailsManager;
@@ -51,7 +51,7 @@ public class GameRoomSecurityConfig {
 
                                 .requestMatchers("/home", "/pcs/**" , "/players/**", "/account/**").hasAnyRole("EMPLOYEE", "MANAGER", "ADMIN")
 
-                                .requestMatchers("/save/**", "/update/**", "/form/**").hasAnyRole("MANAGER", "ADMIN")
+                                .requestMatchers("/save/**", "/update/**", "/form/**", "/accounts/**").hasAnyRole("MANAGER", "ADMIN")
 
                                 .requestMatchers("/remove/**").hasRole("ADMIN")
 

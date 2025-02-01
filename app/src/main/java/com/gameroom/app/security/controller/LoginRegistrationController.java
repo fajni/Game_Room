@@ -81,9 +81,9 @@ public class LoginRegistrationController {
     }
 
     @PostMapping("/myLogin")
-    public String login(@RequestParam String username, @RequestParam String password, HttpServletRequest request) {
+    public String login(@RequestParam String email, @RequestParam String password, HttpServletRequest request) {
 
-        User u = userService.findUserByUsername(username);
+        User u = userService.findUserByEmail(email);
 
         if (u == null) {
             System.out.println("User not found!");
@@ -95,15 +95,18 @@ public class LoginRegistrationController {
             return "redirect:/showLoginPage";
         }
 
-
         // authentication
         try {
-            request.login(username, password); // https://www.baeldung.com/spring-security-auto-login-user-after-registration
+            request.login(email, password); // https://www.baeldung.com/spring-security-auto-login-user-after-registration
         } catch (ServletException e) {
             System.err.println("Error while login! - " + e);
         }
 
         System.out.println("Login successful! - " + request.getRemoteUser());
+
+        // TODO: Send confirmation email
+
+        // TODO: Send JWT token
 
         return "redirect:/home";
     }
@@ -121,8 +124,6 @@ public class LoginRegistrationController {
         }
 
         SecurityContextHolder.clearContext(); // delete authentication from Spring Security context
-
-        // you can maybe use request.logout() instead all of the above...
 
         return "redirect:/";
     }
