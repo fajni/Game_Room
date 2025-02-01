@@ -34,7 +34,7 @@ public class UserService {
         user.setRole(role);
         user.setPassword("{noop}" + user.getPassword());
 
-        try{
+        try {
             userDAO.saveUser(user);
         } catch (Exception e) {
             System.err.println("Could NOT SAVE User - " + user);
@@ -48,10 +48,23 @@ public class UserService {
 
         User user = null;
 
-        try{
+        try {
             user = userDAO.findUserByUsername(username);
         } catch (Exception e) {
             System.err.println("Could NOT FIND User with username: - " + username);
+        }
+
+        return user;
+    }
+
+    public User findUserByEmail(String email) {
+
+        User user = null;
+
+        try {
+            user = userDAO.findUserByEmail(email);
+        } catch (Exception e) {
+            System.err.println("Could NOT FIND User with email - " + email);
         }
 
         return user;

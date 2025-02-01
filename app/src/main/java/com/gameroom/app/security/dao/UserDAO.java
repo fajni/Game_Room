@@ -34,6 +34,22 @@ public class UserDAO {
         return user;
     }
 
+    public User findUserByEmail(String email) {
+
+        TypedQuery<User> query = entityManager.createQuery("SELECT u FROM User u WHERE u.email = :data", User.class);
+        query.setParameter("data", email);
+
+        User user = null;
+
+        try{
+            user = query.getSingleResult();
+        } catch (Exception e) {
+            System.err.println("User email not found - " + email);
+        }
+
+        return user;
+    }
+
     public void saveUser(User user) {
 
         entityManager.persist(user);

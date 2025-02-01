@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
@@ -11,6 +12,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import javax.sql.DataSource;
 
 @Configuration
+//@EnableWebSecurity
 public class GameRoomSecurityConfig {
 
     @Bean
@@ -40,11 +42,12 @@ public class GameRoomSecurityConfig {
                 .csrf(httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer.disable())
 
                 // use HTTP Basic Authentication
-                .httpBasic(Customizer.withDefaults())
+                //.httpBasic(Customizer.withDefaults())
+                .httpBasic(httpBasic -> httpBasic.disable())
 
                 .authorizeHttpRequests(configurer ->
                         configurer
-                                .requestMatchers("/showLoginPage", "/showRegisterPage", "/users/**", "/register/**", "/", "/logout").permitAll()
+                                .requestMatchers("/showLoginPage", "/showRegisterPage", "/users/**", "/register/**", "/", "/logout/**", "/myLogin/**").permitAll()
 
                                 .requestMatchers("/home", "/pcs/**" , "/players/**", "/account/**").hasAnyRole("EMPLOYEE", "MANAGER", "ADMIN")
 
@@ -54,20 +57,27 @@ public class GameRoomSecurityConfig {
 
                                 .anyRequest().authenticated()
                 )
-                .formLogin(form ->
-                        form
-                                .loginPage("/showLoginPage")
-                                .usernameParameter("username")
-                                .passwordParameter("password")
-                                .loginProcessingUrl("/authenticateTheUser")
-                                .defaultSuccessUrl("/home")
-                                .permitAll()
-                )
-                .logout(logout -> logout
-                        .logoutUrl("/logout")
-                        .logoutSuccessUrl("/")
-                        .permitAll()
-                )
+
+//                .formLogin(form ->
+//                        form
+//                                .loginPage("/showLoginPage")
+//                                .usernameParameter("username")
+//                                .passwordParameter("password")
+//                                .loginProcessingUrl("/myLogin")
+//                                .defaultSuccessUrl("/home")
+//                                .permitAll()
+//                )
+                .formLogin(form -> form.disable()) // my custom login logic
+
+//                .logout(logout -> logout
+//                        .logoutUrl("/logout")
+//                        .logoutSuccessUrl("/")
+//                        .invalidateHttpSession(true) // delete session
+//                        .deleteCookies("JSESSIONID") // delete session cookies
+//                        .permitAll()
+//                )
+                .logout(logout -> logout.disable()) // my custom logout logic
+
                 .exceptionHandling(configurer ->
                         configurer
                                 .accessDeniedPage("/access-denied")
