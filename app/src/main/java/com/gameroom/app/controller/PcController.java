@@ -4,6 +4,7 @@ import com.gameroom.app.model.Pc;
 import com.gameroom.app.model.PcDetail;
 import com.gameroom.app.service.PcService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -47,6 +48,7 @@ public class PcController {
 
     /* DELETE MAPPINGS */
     @GetMapping("/remove/pc/{pcNumber}") // get mapping for delete - html can't send delete request
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')") // testing @PreAuthorize annotation
     public String deletePcGet(@PathVariable("pcNumber") Long pcNumber) {
 
         pcService.deletePcById(pcNumber);
@@ -55,6 +57,7 @@ public class PcController {
     }
 
     @DeleteMapping("/remove/pc/{pcNumber}")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public void deletePc(@PathVariable("pcNumber") Long pcNumber) {
 
         pcService.deletePcById(pcNumber);

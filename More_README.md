@@ -100,11 +100,12 @@ Player can't be stored into database/table if he's not using the PC.
 
 ## DemoController
 
-| Request | Link                    | Description                                          |
-|---------|-------------------------|------------------------------------------------------|
-| GET     | localhost:8080          | Landing page.<br/>Everyone can see this page.        |
-| GET     | localhost:8080/home     | Home page.<br/>Only logged users can see this page.  |
-| GET     | localhost:8080/account  | Your account page. _(username, password, role, ...)_ |
+| Request | Link                     | Description                                          |
+|---------|--------------------------|------------------------------------------------------|
+| GET     | localhost:8080           | Landing page.<br/>Everyone can see this page.        |
+| GET     | localhost:8080/home      | Home page.<br/>Only logged users can see this page.  |
+| GET     | localhost:8080/account   | Your account page. _(username, password, role, ...)_ |
+| GET     | localhost:8080/accounts  | All registered available accounts and their roles.   |
 
 ## PcController
 
@@ -143,6 +144,7 @@ Player can't be stored into database/table if he's not using the PC.
 | GET     | localhost:8080/access-denied    | Access Denied page. |
 | POST    | localhost:8080/logout           | User logout.        |
 | POST    | localhost:8080/register         | Add/Save new user.  |
+| POST    | localhost:8080/myLogin          | User login.         |
 
 # TO DO
 

@@ -3,7 +3,6 @@ package com.gameroom.app.security.controller;
 import com.gameroom.app.security.model.User;
 import com.gameroom.app.security.service.RoleService;
 import com.gameroom.app.security.service.UserService;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Objects;
 
 @Controller
 public class LoginRegistrationController {
@@ -49,17 +47,6 @@ public class LoginRegistrationController {
         return "registration-page";
     }
 
-    @GetMapping("/users")
-    @ResponseBody //json
-    public List<User> showRegisteredUsers(Model model) {
-
-        List<User> users = userService.findAllUsers();
-
-        model.addAttribute("users", users);
-
-        return users;
-    }
-
     @GetMapping("/access-denied")
     public String accessDenied() {
 
@@ -83,30 +70,9 @@ public class LoginRegistrationController {
     @PostMapping("/myLogin")
     public String login(@RequestParam String email, @RequestParam String password, HttpServletRequest request) {
 
-        User u = userService.findUserByEmail(email);
-
-        if (u == null) {
-            System.out.println("User not found!");
+        if(!userService.verify(email, password, request)){
             return "redirect:/showLoginPage";
         }
-
-        if (!Objects.equals(u.getPassword(), "{noop}" + password)) {
-            System.out.println("Invalid password!");
-            return "redirect:/showLoginPage";
-        }
-
-        // authentication
-        try {
-            request.login(email, password); // https://www.baeldung.com/spring-security-auto-login-user-after-registration
-        } catch (ServletException e) {
-            System.err.println("Error while login! - " + e);
-        }
-
-        System.out.println("Login successful! - " + request.getRemoteUser());
-
-        // TODO: Send confirmation email
-
-        // TODO: Send JWT token
 
         return "redirect:/home";
     }
@@ -114,16 +80,7 @@ public class LoginRegistrationController {
     @PostMapping("/logout")
     public String myLogout(HttpServletRequest request) {
 
-        System.out.println("My logout! - " + request.getRemoteUser());
-
-        HttpSession session = request.getSession(false);
-
-        if (session != null) {
-
-            session.invalidate(); // delete session that has been found
-        }
-
-        SecurityContextHolder.clearContext(); // delete authentication from Spring Security context
+        userService.myLogout(request);
 
         return "redirect:/";
     }
