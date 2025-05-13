@@ -150,5 +150,5 @@ Player can't be stored into database/table if he's not using the PC.
 
 - Custom Login/Logout = (01-Feb-2025), 
 - JWT, 
-- Spring Email, 
+- Spring Email = (13-May-2025), 
 - Pagination, 

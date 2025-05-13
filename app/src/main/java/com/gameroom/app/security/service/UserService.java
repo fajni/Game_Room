@@ -1,9 +1,11 @@
 package com.gameroom.app.security.service;
 
+import com.gameroom.app.email.EmailService;
 import com.gameroom.app.security.dao.RoleDAO;
 import com.gameroom.app.security.dao.UserDAO;
 import com.gameroom.app.security.model.Role;
 import com.gameroom.app.security.model.User;
+import jakarta.mail.MessagingException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -22,11 +24,14 @@ public class UserService {
 
     private final RoleDAO roleDAO;
 
+    private final EmailService emailService;
+
     @Autowired
-    public UserService(UserDAO userDAO, RoleDAO roleDAO) {
+    public UserService(UserDAO userDAO, RoleDAO roleDAO, EmailService emailService) {
 
         this.userDAO = userDAO;
         this.roleDAO = roleDAO;
+        this.emailService = emailService;
     }
 
     @Transactional
@@ -40,13 +45,22 @@ public class UserService {
         user.setPassword("{noop}" + user.getPassword());
 
         try {
-            userDAO.saveUser(user);
+
+            String text = "Dear " + user.getUsername().toUpperCase() + " you've successfully created account." + "\n" + "\n" +
+                    "Username: " + user.getUsername() + "\n" + "Password: " + user.getPassword() + "\n" +
+                    "Email: " + user.getEmail() + "\n" + "Role: " + user.getRole().getRoleName();
+
+            if(emailService.sendMessage(user.getEmail(), "Registration successfully", text)){
+                userDAO.saveUser(user);
+            }
+
+            return true;
+
         } catch (Exception e) {
-            System.err.println("Could NOT SAVE User - " + user);
+
+            System.err.println("Error - " + e.getMessage());
             return false;
         }
-
-        return true;
     }
 
     @Transactional
@@ -96,7 +110,7 @@ public class UserService {
         }
 
         if (!Objects.equals(u.getPassword(), "{noop}" + password)) {
-            System.out.println("Invalid password!");
+            System.out.println("Invalid password! - " + password);
             return false;
         }
 
