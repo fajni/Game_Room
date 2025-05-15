@@ -1,19 +1,24 @@
 package com.gameroom.app.security;
 
+import com.gameroom.app.security.jwt.JwtAuthFilter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.sql.DataSource;
 
 @Configuration
 //@EnableWebSecurity
 public class GameRoomSecurityConfig {
+
+    @Autowired
+    private JwtAuthFilter jwtAuthFilter;
 
     @Bean
     public UserDetailsManager userDetailsManager(DataSource dataSource) {
@@ -47,7 +52,7 @@ public class GameRoomSecurityConfig {
 
                 .authorizeHttpRequests(configurer ->
                         configurer
-                                .requestMatchers("/showLoginPage", "/showRegisterPage", "/users/**", "/register/**", "/", "/logout/**", "/myLogin/**").permitAll()
+                                .requestMatchers("/showLoginPage", "/showRegisterPage", "/users/**", "/register/**", "/", "/logout/**", "/myLogin/**", "/token/**").permitAll()
 
                                 .requestMatchers("/home", "/pcs/**" , "/players/**", "/account/**").hasAnyRole("EMPLOYEE", "MANAGER", "ADMIN")
 
@@ -81,10 +86,28 @@ public class GameRoomSecurityConfig {
                 .exceptionHandling(configurer ->
                         configurer
                                 .accessDeniedPage("/access-denied")
-                );
+                )
+
+                /* JWT TOKEN */
+                // Spring Security won't create HTTP sessions for storing authentication state
+                // Each request is completely independent and independently carries all the
+                //      necessary data for authentication
+                .sessionManagement(session ->
+                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+
+                // jwt filter before username-password filter
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
+
+        ;
 
         return http.build();
 
     }
+
+//    @Bean
+//    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
+//
+//        return config.getAuthenticationManager();
+//    }
 
 }

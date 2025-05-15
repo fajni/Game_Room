@@ -15,7 +15,7 @@ public class EmailService {
 
         SimpleMailMessage message = new SimpleMailMessage();
 
-        //message.setFrom("");
+        message.setFrom("Game_Room");
         message.setTo(to);
         message.setSubject(subject);
         message.setText(text);

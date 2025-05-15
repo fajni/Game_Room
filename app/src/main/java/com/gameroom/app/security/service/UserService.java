@@ -3,9 +3,9 @@ package com.gameroom.app.security.service;
 import com.gameroom.app.email.EmailService;
 import com.gameroom.app.security.dao.RoleDAO;
 import com.gameroom.app.security.dao.UserDAO;
+import com.gameroom.app.security.jwt.JwtService;
 import com.gameroom.app.security.model.Role;
 import com.gameroom.app.security.model.User;
-import jakarta.mail.MessagingException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -26,12 +26,15 @@ public class UserService {
 
     private final EmailService emailService;
 
+    private final JwtService jwtService;
+
     @Autowired
-    public UserService(UserDAO userDAO, RoleDAO roleDAO, EmailService emailService) {
+    public UserService(UserDAO userDAO, RoleDAO roleDAO, EmailService emailService, JwtService jwtService) {
 
         this.userDAO = userDAO;
         this.roleDAO = roleDAO;
         this.emailService = emailService;
+        this.jwtService = jwtService;
     }
 
     @Transactional
@@ -102,27 +105,27 @@ public class UserService {
 
     public boolean verify(String email, String password, HttpServletRequest request) {
 
-        User u = findUserByEmail(email);
+        User user = findUserByEmail(email);
 
-        if (u == null) {
+        if (user == null) {
             System.out.println("User not found!");
             return false;
         }
 
-        if (!Objects.equals(u.getPassword(), "{noop}" + password)) {
+        if (!Objects.equals(user.getPassword(), "{noop}" + password)) {
             System.out.println("Invalid password! - " + password);
             return false;
         }
 
         // authentication
         try {
+
             request.login(email, password); // https://www.baeldung.com/spring-security-auto-login-user-after-registration
+
         } catch (ServletException e) {
-            System.err.println("Error while login! - " + e);
+            System.err.println("Error while login! - " + e.getMessage());
             return false;
         }
-
-        // TODO: JWT
 
         System.out.println("Login successful! - " + request.getRemoteUser());
 
@@ -142,5 +145,16 @@ public class UserService {
 
         SecurityContextHolder.clearContext(); // delete authentication from Spring Security context
 
+    }
+
+    public String generateToken(String email) {
+
+        User user = findUserByEmail(email);
+        String token = jwtService.generateToken(user);
+
+        System.out.println("Token: " + token);
+        System.out.println("Is Token Valid: " + jwtService.validateToken(token, user));
+
+        return token;
     }
 }

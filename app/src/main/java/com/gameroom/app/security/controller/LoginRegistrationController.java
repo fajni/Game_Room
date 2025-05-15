@@ -3,6 +3,7 @@ package com.gameroom.app.security.controller;
 import com.gameroom.app.security.model.User;
 import com.gameroom.app.security.service.RoleService;
 import com.gameroom.app.security.service.UserService;
+import jakarta.annotation.Nullable;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +54,14 @@ public class LoginRegistrationController {
         return "access-denied";
     }
 
+    // Test, not actual request
+    @GetMapping("/token")
+    @ResponseBody
+    public String confirmUser(@RequestParam(required = false) String token) {
+
+        return "Token confirmed - " + token;
+    }
+
     @PostMapping("/register")
     public String registration(@ModelAttribute("user") User user) {
 
@@ -68,13 +77,17 @@ public class LoginRegistrationController {
     }
 
     @PostMapping("/myLogin")
+    @ResponseBody
     public String login(@RequestParam String email, @RequestParam String password, HttpServletRequest request) {
+
+        // request is send by the user, when sending a PostRequest.
 
         if(!userService.verify(email, password, request)){
             return "redirect:/showLoginPage";
         }
 
-        return "redirect:/home";
+        return userService.generateToken(email);
+        //return "redirect:/home";
     }
 
     @PostMapping("/logout")

@@ -19,6 +19,7 @@ This project is not made to look good visually, but to be functional.
   - [Pc Controller](#pccontroller)
   - [Player Controller](#playercontroller)
   - [Login/Registration Controller](#loginregistrationcontroller)
+- [Authentication](#authentication)
 - [To Do](#to-do)
 
 # Prerequisites
@@ -42,37 +43,37 @@ Images from final projects:
 
 - Landing page:
 
-  <img src="./other/landing-page.png"/>
+  <img src="./images/landing-page.png"/>
   <hr/>
 
 - Login page:
 
-  <img src="./other/login-page.png"/>
+  <img src="./images/login-page.png"/>
   <hr/>
 
 - Registration page:
 
-  <img src="./other/registration-page.png"/>
+  <img src="./images/registration-page.png"/>
   <hr/>
 
 - Home page:
 
-  <img src="./other/home-page.png"/>
+  <img src="./images/home-page.png"/>
   <hr/>
 
 - Employee PC View (_Same with Employee Player View_):
 
-  <img src="./other/employee-pc.png"/>
+  <img src="./images/employee-pc.png"/>
   <hr/>
 
 - Manager PC View (_Same with Manager Player View_):
 
-  <img src="./other/manager-pc.png"/>
+  <img src="./images/manager-pc.png"/>
   <hr/>
 
 - Admin PC View (_Same with Admin Player View_):
 
-  <img src="./other/admin-pc.png"/>
+  <img src="./images/admin-pc.png"/>
   <hr/>
 
 </details>
@@ -85,7 +86,7 @@ Player can't be stored into database/table if he's not using the PC.
 
 # ER Diagrams
 
-<img src="./other/er.png" />
+<img src="./images/er.png" />
 
 | Relationship     | Association    | Fetch Type | Description                                                                                                                            |
 |------------------|----------------|------------|----------------------------------------------------------------------------------------------------------------------------------------|
@@ -94,7 +95,7 @@ Player can't be stored into database/table if he's not using the PC.
 
 ## Login/Registration
 
-<img src="./other/users-roles.png"/>
+<img src="./images/users-roles.png"/>
 
 # Endpoints
 
@@ -146,9 +147,69 @@ Player can't be stored into database/table if he's not using the PC.
 | POST    | localhost:8080/register         | Add/Save new user.  |
 | POST    | localhost:8080/myLogin          | User login.         |
 
+# Authentication
+
+## Stateless Authentication
+
+__JWT TOKEN__
+
+If stateless authentication is used, you can't use Thymeleaf views in Controllers.
+
+Example (Postman):
+
+<img src="./images/JWT_players.PNG"/>
+
+## Stateful Authentication
+
+__UsernamePasswordAuthenticationToken__
+
+To enable stateful authentication again change next code:
+
+- GameRoomSecurityConfig (disable _sessionManagement_ and _addFilterBefore_):
+```java
+@Configuration
+public class GameRoomSecurityConfig {
+    
+    // ...
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
+        http
+                //  ...
+                
+                //.sessionManagement(session ->
+                //        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                
+                //.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+        
+        return http.build();
+    }
+}
+```
+
+- LoginRegistrationController (change _myLogin_ post request):
+```java
+@Controller
+public class LoginRegistrationController {
+    
+    // ...
+
+    @PostMapping("/myLogin")
+    @ResponseBody
+    public String login(@RequestParam String email, @RequestParam String password, HttpServletRequest request) {
+  
+        if(!userService.verify(email, password, request)){
+          return "redirect:/showLoginPage";
+        }
+        
+        return "redirect:/home";
+    }
+}
+```
+
 # TO DO
 
 - Custom Login/Logout = (01-Feb-2025), 
-- JWT, 
+- JWT = (15-May-2025), 
 - Spring Email = (13-May-2025), 
 - Pagination, 

@@ -3,7 +3,8 @@
 Spring Boot MVC web application with Spring Boot Security. 
 Manage PCs and Players.
 
-This project is not made to look good visually, but to be functional.
+Current project is using JWT (Stateless authentication) for authentication, so
+the Thymeleaf views won't work. To change this read [Authentication](#authentication).
 
 # Content:
 
@@ -13,6 +14,7 @@ This project is not made to look good visually, but to be functional.
 - [ER Diagrams](#er-diagrams)
   - [Login/Registration](#loginregistration)
 - [More about this project](#more-about-this-project)
+  - [Authentication](#authentication)
 
 # Prerequisites
 
@@ -33,39 +35,44 @@ Images from final projects:
 <details>
 <summary>IMAGES</summary>
 
+  - Email:
+  
+  <img src="./images/email.PNG"/>
+  <hr/>
+
   - Landing page:
 
-  <img src="./other/landing-page.png"/>
+  <img src="./images/landing-page.png"/>
   <hr/>
 
   - Login page:
 
-  <img src="./other/login-page.png"/>
+  <img src="./images/login-page.png"/>
   <hr/>
 
   - Registration page:
 
-  <img src="./other/registration-page.png"/>
+  <img src="./images/registration-page.png"/>
   <hr/>
 
   - Home page:
 
-  <img src="./other/home-page.png"/>
+  <img src="./images/home-page.png"/>
   <hr/>
 
   - Employee PC View (_Same with Employee Player View_):
 
-  <img src="./other/employee-pc.png"/>
+  <img src="./images/employee-pc.png"/>
   <hr/>
 
   - Manager PC View (_Same with Manager Player View_):
 
-  <img src="./other/manager-pc.png"/>
+  <img src="./images/manager-pc.png"/>
   <hr/>
 
   - Admin PC View (_Same with Admin Player View_):
 
-  <img src="./other/admin-pc.png"/>
+  <img src="./images/admin-pc.png"/>
   <hr/>
 
 </details>
@@ -78,12 +85,20 @@ Player can't be stored into database/table if not using the PC.
 
 # ER Diagrams
 
-<img src="./other/er.png" />
+<img src="./images/er.png" />
 
 ## Login/Registration
 
-<img src="./other/users-roles.png"/>
+<img src="./images/users-roles.png"/>
 
 # More about this project
+
+This project is not made to look good visually, but to be functional.
+
+## Authentication
+
+For Stateful/Stateless authentication check: [More_README.md](More_README.md)
+
+<hr/>
 
 For more, check file: <a href = "./More_README.md">More_README.md</a>

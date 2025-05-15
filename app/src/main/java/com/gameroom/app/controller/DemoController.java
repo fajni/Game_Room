@@ -71,7 +71,7 @@ public class DemoController {
     }
 
 
-    @GetMapping("/accounts")
+    @GetMapping({"/accounts", "/users"})
     public String accounts(Model model) {
 
         List<User> accounts = userService.findAllUsers();
