@@ -25,7 +25,12 @@ the Thymeleaf views won't work. To change this read [Authentication](#authentica
   - MySQL Driver,
   - Spring Web,
   - Thymeleaf,
-  - Spring Security
+  - Spring Security,
+  - Java Mail Sender,
+  - JWT:
+    - JJWT :: API 0.12.6,
+    - JJWT :: Impl 0.12.6,
+    - JJWT :: Extensions :: Jackson 0.12.6
 - Bootstrap
 
 # Project
@@ -73,6 +78,11 @@ Images from final projects:
   - Admin PC View (_Same with Admin Player View_):
 
   <img src="./images/admin-pc.png"/>
+  <hr/>
+
+  - Access Denied:
+
+  <img src="./images/access-denied.PNG" />
   <hr/>
 
 </details>

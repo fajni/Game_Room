@@ -69,10 +69,11 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                         null,
                         userAuthorities
                 );
-                // usernamePasswordToken (knows about user) needs to know about request details
+                // usernamePasswordToken (knows about user) needs to know about request details. It's not necessarily required to do this
+                //  if you're using IP validation. Ip/Session Info
                 usernamePasswordToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
-                // adding the token to the chain
+                // adding the token to the chain. Without this SecurityContext is empty and application thinks that user is not logged in.
                 SecurityContextHolder.getContext().setAuthentication(usernamePasswordToken);
             }
 

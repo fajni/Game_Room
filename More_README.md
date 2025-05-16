@@ -20,6 +20,8 @@ This project is not made to look good visually, but to be functional.
   - [Player Controller](#playercontroller)
   - [Login/Registration Controller](#loginregistrationcontroller)
 - [Authentication](#authentication)
+  - [JWT - Stateless Authentication](#stateless-authentication)
+  - [Username/Password - Stateful Authentication](#stateful-authentication)
 - [To Do](#to-do)
 
 # Prerequisites
@@ -31,7 +33,12 @@ This project is not made to look good visually, but to be functional.
   - MySQL Driver,
   - Spring Web,
   - Thymeleaf,
-  - Spring Security
+  - Spring Security,
+  - Java Mail Sender,
+  - JWT (0.12.6):
+    - JJWT :: API 0.12.6,
+    - JJWT :: Impl 0.12.6,
+    - JJWT :: Extensions :: Jackson 0.12.6
 - Bootstrap
 
 # Project

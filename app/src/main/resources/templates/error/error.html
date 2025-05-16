@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Access Denied</title>
+    <title>Error</title>
 
     <!--Bootstrap CSS-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.css">
@@ -13,9 +13,11 @@
 
     <br/>
 
-    <h2 style="color: red;">Access Denied - You're not authorized!</h2>
+    <h2>ERROR!</h2>
     <hr/>
-    <a th:href="@{/home}">Back to Home Page</a>
+    <h3 style="color:red">Error occurred!</h3>
+
+    <a th:href="@{/home}">Go Home</a>
 
 </body>
 </html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>Navigation Bar</title>
+
+    <!--Bootstrap CSS-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.css">
+
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav th:fragment="navbar()" class="navbar navbar-light bg-light">
+        <div class="container justify-content-between">
+
+            <a class="navbar-brand">
+                <img src="https://spring.io/img/logos/spring-initializr.svg" width="30" height="30" class="d-inline-block align-top rounded-circle" alt="">
+                Spring Boot
+            </a>&VerticalLine;
+
+            <a th:href="@{/home}" class="navbar-brand" style="padding-left: 20px"><b>Home</b></a>&VerticalLine;
+
+            <a th:href="@{/players}" class="navbar-brand" style="padding-left: 20px"><b>Players</b></a>&VerticalLine;
+
+            <a th:href="@{/pcs}" class="navbar-brand" style="padding-left: 20px"><b>PCs</b></a>&VerticalLine;
+
+            <a th:href="@{/account}" class="navbar-brand" style="padding-left: 20px"><b>My Account</b></a>
+        </div>
+    </nav>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
