@@ -26,7 +26,7 @@ public class EmailConfig {
         javaMailSender.setPort(587);
         javaMailSender.getJavaMailProperties().setProperty("mail.smtp.starttls.enable", "true");
 
-        // real email Username and Password
+        // real email Username and Password - (check env.txt file)
         javaMailSender.setUsername("your.real.gmail@gmail.com");
         javaMailSender.setPassword("1234 5678 9abc defg"); // for password you need to add this app to gmail (https://myaccount.google.com/apppasswords)
 

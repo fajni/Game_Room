@@ -54,6 +54,25 @@
         </tbody>
     </table>
 
+    <div th:if="${totalPcs != null}">
+
+        <p class="text-center">
+            Total pcs: <b>[[${totalPcs}]]</b> &VerticalLine;
+            Page <b>[[${pageNumber + 1}]]</b> of <b>[[${totalPages}]]</b>
+        </p>
+
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <a th:if="${pageNumber > 0}" th:href="@{/pcs(page=${pageNumber - 1}, size=${pageSize})}">
+                <b class="page-link">PREV PAGE</b>
+            </a>
+            <a th:if="${pageNumber < totalPages - 1}" th:href="@{/pcs(page=${pageNumber + 1}, size=${pageSize})}">
+                <b class="page-link">NEXT PAGE</b>
+            </a>
+        </div>
+
+    </div>
+
+    <br/>
     <a th:href="@{/home}">HOME</a>
 
 </body>

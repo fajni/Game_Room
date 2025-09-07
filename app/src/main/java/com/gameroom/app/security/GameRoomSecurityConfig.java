@@ -4,7 +4,9 @@ import com.gameroom.app.security.jwt.JwtAuthFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
@@ -14,7 +16,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import javax.sql.DataSource;
 
 @Configuration
-//@EnableWebSecurity
+//@EnableWebSecurity // Spring Boot will automatically autoconfigure security beans for you. This annotation is for Spring to enable autoconfigure security beans.
 public class GameRoomSecurityConfig {
 
     @Autowired
@@ -43,10 +45,10 @@ public class GameRoomSecurityConfig {
 
         http
 
-                // for RestController (disable Cross Site Request Forgery):
+                // for RestController (disable Cross Site Request Forgery) - Protection:
                 .csrf(httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer.disable())
 
-                // use HTTP Basic Authentication
+                // use HTTP Basic Authentication, username & password are send in HTTP header in every request.
                 //.httpBasic(Customizer.withDefaults())
                 .httpBasic(httpBasic -> httpBasic.disable())
 
@@ -74,6 +76,10 @@ public class GameRoomSecurityConfig {
 //                )
                 .formLogin(form -> form.disable()) // my custom login logic
 
+                // Enable oauth2 login, in application.properties you're setting the which service you want to use.
+                //.oauth2Login(oauth2 -> oauth2.loginPage("/showLoginPage"))
+                .oauth2Login(Customizer.withDefaults()) // TODO: can't go with defaults
+
 //                .logout(logout -> logout
 //                        .logoutUrl("/logout")
 //                        .logoutSuccessUrl("/")
@@ -92,11 +98,11 @@ public class GameRoomSecurityConfig {
                 // Spring Security won't create HTTP sessions for storing authentication state
                 // Each request is completely independent and independently carries all the
                 //      necessary data for authentication
-                .sessionManagement(session ->
-                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+//                .sessionManagement(session ->
+//                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 
                 // jwt filter before username-password filter
-                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
+//                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
 
         ;
 

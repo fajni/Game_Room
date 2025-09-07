@@ -77,7 +77,7 @@ public class LoginRegistrationController {
     }
 
     @PostMapping("/myLogin")
-    @ResponseBody
+    //@ResponseBody
     public String login(@RequestParam String email, @RequestParam String password, HttpServletRequest request) {
 
         // request is send by the user, when sending a PostRequest.
@@ -86,8 +86,8 @@ public class LoginRegistrationController {
             return "redirect:/showLoginPage";
         }
 
-        return userService.generateToken(email);
-        //return "redirect:/home";
+        //return userService.generateToken(email);
+        return "redirect:/home";
     }
 
     @PostMapping("/logout")

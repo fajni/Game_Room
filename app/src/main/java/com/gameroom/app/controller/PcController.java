@@ -25,7 +25,7 @@ public class PcController {
 
 
     /* SHOW - GET MAPPINGS */
-    @GetMapping("/pcs")
+    @GetMapping({"/pcs/all", "/pcs/"})
     public String showAllPcs(Model model) {
 
         List<Pc> pcs = pcService.findAllPcs();
@@ -129,6 +129,24 @@ public class PcController {
         pcService.updatePc(pc);
 
         return "redirect:/pcs";
+    }
+
+
+    /* PAGINATION */
+
+    @GetMapping("/pcs") // pcs?page=0&size=5, pcs?page=0
+    public String showPcs(Model model, @RequestParam(defaultValue = "0", name = "page") int pageNumber, @RequestParam(defaultValue = "5", name = "size") int pageSize) {
+
+        List<Pc> pcs = pcService.findPcs(pageNumber, pageSize).getContent();
+        int totalPcs = pcService.findAllPcs().size();
+        int totalPages = pcService.findPcs(pageNumber, pageSize).getTotalPages();
+
+        model.addAttribute("pcs", pcs);
+        model.addAttribute("totalPcs", totalPcs);
+        model.addAttribute("totalPages", totalPages);
+        model.addAttribute("pageNumber", pageNumber);
+
+        return "/pc/pcs";
     }
 
 }

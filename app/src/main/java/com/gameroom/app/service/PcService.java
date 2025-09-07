@@ -1,9 +1,13 @@
 package com.gameroom.app.service;
 
+import com.gameroom.app.dao.IPcRepository;
 import com.gameroom.app.dao.PcDAO;
 import com.gameroom.app.model.Pc;
 import com.gameroom.app.model.PcDetail;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,10 +17,12 @@ import java.util.List;
 public class PcService {
 
     private final PcDAO pcDAO;
+    private final IPcRepository pcRepository;
 
     @Autowired
-    public PcService(PcDAO pcDAO) {
+    public PcService(PcDAO pcDAO, IPcRepository pcRepository) {
         this.pcDAO = pcDAO;
+        this.pcRepository = pcRepository;
     }
 
     @Transactional
@@ -95,6 +101,16 @@ public class PcService {
         }
 
         return pc;
+    }
+
+
+    /* PAGINATION */
+
+    public Page<Pc> findPcs(int pageNumber, int pageSize) {
+
+        Pageable page = PageRequest.of(pageNumber, pageSize);
+
+        return pcRepository.findAll(page);
     }
 
 }
