@@ -219,4 +219,6 @@ public class LoginRegistrationController {
 - Custom Login/Logout = (01-Feb-2025), 
 - JWT = (15-May-2025), 
 - Spring Email = (13-May-2025), 
-- Pagination, 
+- Pagination = (07-Sep-2025), 
+- Spring AOP (_Aspect-Oriented Programming_) = (07-Sep-2025),
+- 

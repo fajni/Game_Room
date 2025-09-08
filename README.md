@@ -27,6 +27,7 @@ the Thymeleaf views won't work. To change this read [Authentication](#authentica
   - Thymeleaf,
   - Spring Security,
   - Java Mail Sender,
+  - Spring AOP,
   - JWT:
     - JJWT :: API 0.12.6,
     - JJWT :: Impl 0.12.6,
